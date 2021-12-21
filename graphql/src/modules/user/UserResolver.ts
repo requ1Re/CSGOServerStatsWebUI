@@ -5,14 +5,16 @@ import {
   Arg,
   ObjectType,
   Field,
-  UseMiddleware,
   Ctx,
+  Authorized,
 } from "type-graphql";
-import { hash, compare } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { User } from "../../entity/User";
-import { sign } from "jsonwebtoken";
-import { MyContext } from "src/types/MyContext";
-import { isAuthenticated } from "./IsAuthenticated";
+import jwt from "jsonwebtoken";
+import { ConfigUtil } from "../../util/ConfigUtil";
+import { UserLoginDetailsInput } from "./UserLoginDetailsInput";
+import { ServerStatsContext } from "src/types/ServerStatsContext";
+import { ServerStatsJwtPayload } from "src/types/ServerStatsJwtPayload";
 
 
 @ObjectType({ description: "Object containing a accessToken in JWT format" })
@@ -23,70 +25,70 @@ class LoginResponse {
 
 @Resolver()
 export class UserResolver {
-  @Query(() => [User], { description: "Returns all users" })
+  @Authorized()
+  @Query(() => [User], { description: 'Returns all users' })
   async users() {
     return await User.find();
   }
 
+  @Authorized()
   @Query(() => User, {
     nullable: true,
-    description:
-      "Returns the currently authenticated user if it exists, otherwise null",
+    description: 'Returns the currently authenticated user if it exists, otherwise null',
   })
-  @UseMiddleware(isAuthenticated)
-  async me(@Ctx() { payload }: MyContext): Promise<User | null> {
-    return (await User.findOne({ where: { id: payload?.userId } })) ?? null;
+  async me(@Ctx() { user }: ServerStatsContext): Promise<User | null> {
+    console.log(user);
+    return (await User.findOne({ where: { id: user?.userId } })) ?? null;
   }
 
-  @Mutation(() => Boolean, { description: "Register a new user" })
-  async register(
-    @Arg("userName") userName: string,
-    @Arg("password") password: string
-  ) {
-    const hashedPassword = await hash(password, 13);
-    // let user = null;
+  @Mutation(() => User, {
+    nullable: true,
+    description: 'Register a new user, returns the user if registration was successful, returns null otherwise',
+  })
+  async register(@Arg('data', () => UserLoginDetailsInput) data: UserLoginDetailsInput): Promise<User | null> {
+    const hashedPassword = await bcrypt.hash(data.password, 13);
+
+    let user: User;
     try {
-      await User.insert({
-        userName,
+      user = await User.create({
+        userName: data.userName,
         password: hashedPassword,
-      });
+      }).save();
     } catch (err) {
-      console.log(err);
-      return false;
+      return null;
     }
 
-    return true;
+    if (user) {
+      return user;
+    } else {
+      return null;
+    }
   }
 
   @Mutation(() => LoginResponse, {
     nullable: true,
     description:
-      "Logging in a previously created user, returns an object containing the JWT or null if an error occured.",
+      'Logging in a previously created user, returns an object containing the JWT or null if an error occured.',
   })
-  async login(
-    @Arg("userName") userName: string,
-    @Arg("password") password: string
-  ): Promise<LoginResponse | null> {
-    const user = await User.findOne({ where: { userName } });
+  async login(@Arg('data', () => UserLoginDetailsInput) data: UserLoginDetailsInput): Promise<LoginResponse | null> {
+    const user = await User.findOne({ where: { userName: data.userName } });
 
     if (!user) {
       return null;
     }
 
-    const verify = await compare(password, user.password);
+    const verify = await bcrypt.compare(data.password, user.password);
 
     if (!verify) {
       return null;
     }
 
+    const payload: ServerStatsJwtPayload = { userId: user.id.toString() };
+
     return {
-      accessToken: sign(
-        { userId: user.id },
-        process.env.SESSION_SECRET ?? "labmon",
-        {
-          expiresIn: "1d",
-        }
-      ),
+      accessToken: jwt.sign(payload, process.env.JWT_SECRET ?? ConfigUtil.DEFAULT_JWT_SECRET, {
+        expiresIn: '1d',
+      }),
     };
   }
 }

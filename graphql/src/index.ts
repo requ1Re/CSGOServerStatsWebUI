@@ -7,19 +7,24 @@ import cors from "cors";
 import jwt from "express-jwt";
 
 import { UserResolver } from "./modules/user/UserResolver";
+import { customAuthChecker } from "./modules/user/CustomAuthChecker";
 
 const main = async () => {
   await createConnection();
 
   const schema = await buildSchema({
-    resolvers: [UserResolver],
+    resolvers: [
+      UserResolver,
+    ],
+    authChecker: customAuthChecker,
   });
 
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req }) => {
+    context: ({ req, res }) => {
       const context = {
         req,
+        res,
         user: req.user, // `req.user` comes from `express-jwt`
       };
       return context;
@@ -36,7 +41,7 @@ const main = async () => {
   app.use(
     path,
     jwt({
-      secret: process.env.SESSION_SECRET ?? "sseeccrreett",
+      secret: process.env.JWT_SECRET ?? "sseeccrreett",
       credentialsRequired: false,
       algorithms: ["HS256"]
     }),
