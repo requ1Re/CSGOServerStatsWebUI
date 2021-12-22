@@ -1,16 +1,16 @@
 export interface SurfLeaderboard {
-  mapRecords: MapRecord[];
-  playerStats: PlayerStats[];
+  mapLeaderboard: MapLeaderboardEntry[];
+  playerLeaderboard: PlayerLeaderboardEntry[];
 }
 
-export interface MapRecord {
+export interface MapLeaderboardEntry {
   steamid: string;
   mapname: string;
   name: string;
   runtimepro: number;
 }
 
-export interface PlayerStats {
+export interface PlayerLeaderboardEntry {
   steamid: string;
   name: string;
   country: string;
