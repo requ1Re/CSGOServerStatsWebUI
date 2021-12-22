@@ -1,11 +1,16 @@
-export interface SurfLeaderboard {
+import { APIWrapper } from './APIWrapper';
+
+export interface SurfLeaderboard extends APIWrapper<SurfLeaderboardData> {}
+export interface SurfMapLeaderboard extends APIWrapper<MapLeaderboard> {}
+
+export interface SurfLeaderboardData {
   mapLeaderboard: MapLeaderboard[];
   playerLeaderboard: PlayerLeaderboard;
 }
 
 export interface MapLeaderboard extends DefaultPlayerData {
-  mapname: string;
-  runtimepro: number;
+  mapName: string;
+  time: number;
 }
 
 export interface PlayerLeaderboard {
@@ -18,11 +23,11 @@ export interface PointsLeaderboardEntry extends DefaultPlayerData {
 }
 
 export interface FinishedMapsLeaderboardEntry extends DefaultPlayerData {
-  finishedmapspro: number;
+  finishedMaps: number;
 }
 
 interface DefaultPlayerData {
-  steamid: string;
+  steamId: string;
   name: string;
   country?: string;
 }
