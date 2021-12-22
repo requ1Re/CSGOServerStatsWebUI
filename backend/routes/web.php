@@ -20,7 +20,7 @@ $router->get('/', function () use ($router) {
 $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->group(['prefix' => 'server'], function () use ($router) {
         $router->group(['prefix' => 'surf'], function () use ($router) {
-            $router->get('stats', ['uses' => 'StatsController@showSurf']);
+            $router->get('leaderboard', ['uses' => 'StatsController@showSurf']);
         });
         $router->group(['prefix' => 'kz'], function () use ($router) {
             $router->get('stats', ['uses' => 'StatsController@showKZ']);
