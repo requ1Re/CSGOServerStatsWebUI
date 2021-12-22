@@ -5,9 +5,9 @@
         </span>
     </div>
 </div>
-<div class="mt-7 flex flex-col space-y-5 sm:space-y-0 sm:flex-row sm:justify-center space-x-0 sm:space-x-5">
-    <div *ngFor="let item of gamemodes" class="gamemode flex-grow bg-neutral-800 rounded shadow-lg flex flex-col justify-center items-center space-y-2"
-        [style.backgroundImage]="'url(\'' + item.imgPath + '\')'">
+<div class="mt-7 flex flex-col space-y-5 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-5 md:gap-y-5">
+    <div *ngFor="let item of servers" class="gameserver bg-neutral-800 rounded shadow-lg flex flex-col justify-center items-center space-y-2"
+        [style.backgroundImage]="'url(\'' + getServerImage(item) + '\')'">
         <p class="server-name">{{ item.name }}</p>
         <p>{{ item.ip }}</p>
         <div class="flex flex-row justify-center space-x-5">
