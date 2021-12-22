@@ -11,16 +11,12 @@ export class NavbarComponent implements OnInit {
 
   links: NavbarItem[] = [
     {
-      name: 'Servers',
-      url: ['/servers']
+      name: 'Home',
+      url: ['/home']
     },
     {
-      name: 'Placeholder',
-      url: ['/Placeholder']
-    },
-    {
-      name: 'Placeholder',
-      url: ['/Placeholder']
+      name: 'Stats',
+      url: ['/stats']
     }
   ];
 
