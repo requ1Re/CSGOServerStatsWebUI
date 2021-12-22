@@ -14,5 +14,19 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return 'Welcome';
+});
+
+$router->group(['prefix' => 'v1'], function () use ($router) {
+    $router->group(['prefix' => 'server'], function () use ($router) {
+        $router->group(['prefix' => 'surf'], function () use ($router) {
+            $router->get('stats', ['uses' => 'StatsController@showSurf']);
+        });
+        $router->group(['prefix' => 'kz'], function () use ($router) {
+            $router->get('stats', ['uses' => 'StatsController@showKZ']);
+        });
+        $router->group(['prefix' => 'retake'], function () use ($router) {
+            $router->get('stats', ['uses' => 'StatsController@showRetake']);
+        });
+    });
 });
