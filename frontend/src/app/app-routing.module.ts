@@ -11,6 +11,7 @@ const routes: Routes = [
     path: 'servers',
     loadChildren: () => import('./servers/servers.module').then((m) => m.ServersModule),
   },
+  { path: 'stats', loadChildren: () => import('./stats/stats.module').then(m => m.StatsModule) },
 ];
 
 @NgModule({

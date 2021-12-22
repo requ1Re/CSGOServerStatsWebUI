@@ -1,3 +1,5 @@
+import { faChartBar } from '@fortawesome/free-regular-svg-icons';
+import { faServer, faTable } from '@fortawesome/free-solid-svg-icons';
 import { Gamemode } from '../models/Gamemode';
 import { Gameserver } from '../models/Gameserver';
 import { NavbarItem } from '../models/NavbarItem';
@@ -25,10 +27,12 @@ export class ConfigUtil {
       {
         name: 'Servers',
         url: ['/servers'],
+        faIcon: faServer
       },
       {
-        name: 'Stats',
+        name: 'Statistics',
         url: ['/stats'],
+        faIcon: faChartBar
       },
     ],
   };

@@ -24,7 +24,7 @@
                         <a *ngFor="let link of links" [routerLink]="link.url"
                             class="text-zinc-300 hover:bg-zinc-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                             routerLinkActive="bg-zinc-800 text-white" href="#" aria-current="page">
-                            {{ link.name }}
+                            <fa-icon [icon]="link.faIcon"></fa-icon> {{ link.name }}
                         </a>
                     </div>
                 </div>
