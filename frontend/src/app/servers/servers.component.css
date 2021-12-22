@@ -1,0 +1,14 @@
+.gameserver-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+.gameserver {
+    @apply px-5 py-20 bg-blend-overlay text-white;
+
+    background-size: cover;
+}
+.server-name {
+    @apply text-3xl;
+}

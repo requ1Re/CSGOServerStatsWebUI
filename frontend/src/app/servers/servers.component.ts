@@ -1,15 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { faCopy, faPlayCircle } from '@fortawesome/free-regular-svg-icons';
+import { Gameserver } from '../shared/models/Gameserver';
+import { ConfigUtil } from '../shared/utils/ConfigUtil';
+import { GamemodeUtil } from '../shared/utils/GamemodeUtil';
 
 @Component({
   selector: 'app-servers',
   templateUrl: './servers.component.html',
-  styleUrls: ['./servers.component.css']
+  styleUrls: ['./servers.component.css'],
 })
 export class ServersComponent implements OnInit {
+  faCopy = faCopy;
+  faPlayCircle = faPlayCircle;
 
-  constructor() { }
+  servers: Gameserver[] = ConfigUtil.GLOBALS.SERVERS;
 
-  ngOnInit(): void {
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  copyToClipboard(ip: string) {
+    navigator.clipboard
+      .writeText(ip)
+      .then(() => {
+        console.log('Copied IP!');
+      })
+      .catch((err) => {
+        console.log('Something went wrong', err);
+      });
   }
 
+  getServerImage(server: Gameserver): string {
+    return GamemodeUtil.getGamemodeImagePath(server.gamemode);
+  }
 }

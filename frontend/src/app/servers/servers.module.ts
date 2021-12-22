@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ServersRoutingModule } from './servers-routing.module';
 import { ServersComponent } from './servers.component';
-import { ServerListComponent } from './server-list/server-list.component';
+import { SharedModule } from '../shared/shared.module';
+import { ServersRoutingModule } from './servers-routing.module';
 
 
 @NgModule({
   declarations: [
-    ServersComponent,
-    ServerListComponent
+    ServersComponent
   ],
   imports: [
     CommonModule,
-    ServersRoutingModule
+    ServersRoutingModule,
+    SharedModule
   ]
 })
 export class ServersModule { }
