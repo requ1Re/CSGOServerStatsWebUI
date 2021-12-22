@@ -1,20 +1,28 @@
 export interface SurfLeaderboard {
-  mapLeaderboard: MapLeaderboardEntry[];
-  playerLeaderboard: PlayerLeaderboardEntry[];
+  mapLeaderboard: MapLeaderboard[];
+  playerLeaderboard: PlayerLeaderboard;
 }
 
-export interface MapLeaderboardEntry {
-  steamid: string;
+export interface MapLeaderboard extends DefaultPlayerData {
   mapname: string;
-  name: string;
   runtimepro: number;
 }
 
-export interface PlayerLeaderboardEntry {
+export interface PlayerLeaderboard {
+  points: PointsLeaderboardEntry[];
+  finishedMaps: FinishedMapsLeaderboardEntry[];
+}
+
+export interface PointsLeaderboardEntry extends DefaultPlayerData {
+  points: number;
+}
+
+export interface FinishedMapsLeaderboardEntry extends DefaultPlayerData {
+  finishedmapspro: number;
+}
+
+interface DefaultPlayerData {
   steamid: string;
   name: string;
-  country: string;
-  points: number;
-  finishedmaps: number;
-  lastseen: Date;
+  country?: string;
 }
