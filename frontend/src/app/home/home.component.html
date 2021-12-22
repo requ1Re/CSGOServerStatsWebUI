@@ -5,8 +5,8 @@
         </span>
     </div>
 </div>
-<div class="mt-10 flex flex-row justify-center space-x-5">
-    <div *ngFor="let item of gamemodes" class="gamemode flex-grow bg-neutral-800 rounded shadow-lg flex flex-col justify-center align-middle space-y-2"
+<div class="mt-7 flex flex-col space-y-5 sm:space-y-0 sm:flex-row sm:justify-center space-x-0 sm:space-x-5">
+    <div *ngFor="let item of gamemodes" class="gamemode flex-grow bg-neutral-800 rounded shadow-lg flex flex-col justify-center items-center space-y-2"
         [style.backgroundImage]="'url(\'' + item.imgPath + '\')'">
         <p class="server-name">{{ item.name }}</p>
         <p>{{ item.ip }}</p>
@@ -18,5 +18,12 @@
                 <fa-icon [icon]="faPlayCircle"></fa-icon>
             </a>
         </div>
+    </div>
+</div>
+<div class="mt-5 flex flex-row justify-center">
+    <div class="text-3xl text-center font-extrabold">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
+            & more coming soon!
+        </span>
     </div>
 </div>

@@ -2,7 +2,6 @@
     @apply px-5 py-20 bg-blend-overlay text-white;
 
     background-size: cover;
-    text-align: center;
 }
 .server-name {
     @apply text-3xl;
