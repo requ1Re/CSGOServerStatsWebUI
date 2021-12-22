@@ -1,0 +1,37 @@
+.navbar {
+    background-color: var(--color-neutral-900);
+    height: 50px;
+    width: inherit;
+    padding: 5px 10px 5px 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.navbar-brand {
+    height: 75%;
+}
+.navbar-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    margin-left: 10px;
+}
+.navbar-link {
+    float: left;
+}
+.navbar-link a {
+    display: block;
+    color: var(--color-zinc-500);
+    text-decoration: none;
+    text-align: center;
+}
+.navbar-link:not(:last-child) {
+    margin-right: 10px;
+}
+.navbar-link a:hover,
+.navbar-link a.active {
+    border-bottom: solid 5px var(--color-active);
+}
