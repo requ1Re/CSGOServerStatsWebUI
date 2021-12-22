@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarItem } from '../../models/NavbarItem';
+import { ConfigUtil } from '../../utils/ConfigUtil';
 
 @Component({
   selector: 'app-navbar',
@@ -9,16 +11,7 @@ export class NavbarComponent implements OnInit {
 
   open = false;
 
-  links: NavbarItem[] = [
-    {
-      name: 'Home',
-      url: ['/home']
-    },
-    {
-      name: 'Stats',
-      url: ['/stats']
-    }
-  ];
+  links: NavbarItem[] = ConfigUtil.GLOBALS.NAVBAR_ITEMS;
 
   constructor() { }
 
@@ -27,7 +20,3 @@ export class NavbarComponent implements OnInit {
 
 }
 
-interface NavbarItem {
-  name: string;
-  url: string[];
-}
