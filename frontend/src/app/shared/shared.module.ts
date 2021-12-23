@@ -6,11 +6,11 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
-import { TableComponent } from './components/table/table.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent, SafeUrlPipe, TableComponent],
-  imports: [CommonModule, RouterModule, FontAwesomeModule],
-  exports: [NavbarComponent, FooterComponent, FontAwesomeModule, SafeUrlPipe, TableComponent],
+  declarations: [NavbarComponent, FooterComponent, SafeUrlPipe],
+  imports: [CommonModule, RouterModule, FontAwesomeModule, HttpClientModule],
+  exports: [NavbarComponent, FooterComponent, FontAwesomeModule, SafeUrlPipe],
 })
 export class SharedModule {}

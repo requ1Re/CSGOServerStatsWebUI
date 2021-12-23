@@ -1,0 +1,12 @@
+table {
+    @apply bg-zinc-900 shadow-lg text-gray-300 table-auto text-left w-full;
+}
+table > thead > tr {
+    @apply bg-zinc-800;
+}
+table > thead > tr > th {
+    @apply px-5 py-2;
+}
+table > tbody > tr > td {
+    @apply px-5 py-3;
+}

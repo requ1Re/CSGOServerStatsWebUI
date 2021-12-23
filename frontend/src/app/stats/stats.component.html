@@ -1,11 +1,37 @@
-<div class="flex flex-col space-y-5">
+<div class="flex flex-row justify-center">
+    <div class="text-5xl text-center font-extrabold">
+        <span class="gradient-text-1337ffm">
+            Statistics
+        </span>
+    </div>
+</div>
+<div class="flex flex-col space-y-5 mt-7">
     <div>
-        <div class="text-3xl font-extrabold">
+        <div class="text-3xl font-extrabold mb-2">
             <span class="gradient-text-1337ffm">
                 Surf
             </span>
         </div>
         
-        <app-table></app-table>
+        <div class="flex flex-row space-x-5">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>USER</th>
+                        <th>MAP</th>
+                        <th>TIME</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of [0,1,2,3,4]">
+                        <td>{{ item }}</td>
+                        <td>requiRe</td>
+                        <td>surf_utopia_v3</td>
+                        <td>00:55:00.300</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

@@ -4,6 +4,7 @@
 
 @import 'styles/colors.css';
 @import 'styles/text.css';
+@import 'styles/table.css';
 
 * {
     margin: 0;
