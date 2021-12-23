@@ -35,6 +35,7 @@ export class ConfigUtil {
         faIcon: faChartBar,
       },
     ],
+    API_BASE_URL: 'http://localhost:8000/v1',
   };
 
   getFlagImagePath(countryCode: string): string {
@@ -45,4 +46,5 @@ export class ConfigUtil {
 export interface Globals {
   SERVERS: Gameserver[];
   NAVBAR_ITEMS: NavbarItem[];
+  API_BASE_URL: string;
 }
