@@ -9,9 +9,18 @@ const routes: Routes = [
   },
   {
     path: 'servers',
-    loadChildren: () => import('./servers/servers.module').then((m) => m.ServersModule),
+    loadChildren: () =>
+      import('./servers/servers.module').then((m) => m.ServersModule),
   },
-  { path: 'stats', loadChildren: () => import('./stats/stats.module').then(m => m.StatsModule) },
+  {
+    path: 'stats',
+    loadChildren: () =>
+      import('./stats/stats.module').then((m) => m.StatsModule),
+  },
+  {
+    path: 'info',
+    loadChildren: () => import('./info/info.module').then((m) => m.InfoModule),
+  },
 ];
 
 @NgModule({

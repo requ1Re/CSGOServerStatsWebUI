@@ -19,3 +19,10 @@ body {
     height: 100vh;
     width: 100%;
 }
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-color: rgba(234,27,90,1);
+    text-underline-offset: 1px;
+    text-decoration-thickness: 2px;
+}

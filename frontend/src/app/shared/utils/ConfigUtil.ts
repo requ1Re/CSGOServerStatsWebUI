@@ -1,5 +1,5 @@
 import { faChartBar } from '@fortawesome/free-regular-svg-icons';
-import { faServer, faTable } from '@fortawesome/free-solid-svg-icons';
+import { faServer } from '@fortawesome/free-solid-svg-icons';
 import { Gamemode } from '../models/Gamemode';
 import { Gameserver } from '../models/Gameserver';
 import { NavbarItem } from '../models/NavbarItem';
@@ -8,7 +8,7 @@ export class ConfigUtil {
   public static GLOBALS: Globals = {
     SERVERS: [
       {
-        name: 'Retakes #1',
+        name: 'RETAKES #1',
         gamemode: Gamemode.RETAKES,
         ip: '94.130.22.111:27015',
       },
@@ -18,7 +18,7 @@ export class ConfigUtil {
         ip: '94.130.22.111:27016',
       },
       {
-        name: 'Surf #1',
+        name: 'SURF #1',
         gamemode: Gamemode.SURF,
         ip: '94.130.22.111:27017',
       },
@@ -27,15 +27,19 @@ export class ConfigUtil {
       {
         name: 'Servers',
         url: ['/servers'],
-        faIcon: faServer
+        faIcon: faServer,
       },
       {
         name: 'Statistics',
         url: ['/stats'],
-        faIcon: faChartBar
+        faIcon: faChartBar,
       },
     ],
   };
+
+  getFlagImagePath(countryCode: string): string {
+    return `assets/img/flags/${countryCode.toLowerCase()}.svg`;
+  }
 }
 
 export interface Globals {
