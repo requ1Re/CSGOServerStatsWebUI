@@ -12,23 +12,45 @@
                 Surf
             </span>
         </div>
-        
-        <div class="flex flex-row space-x-5">
+
+        <div class="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
             <table>
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>USER</th>
-                        <th>MAP</th>
-                        <th>TIME</th>
+                        <th>POINTS</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr *ngFor="let item of [0,1,2,3,4]">
-                        <td>{{ item }}</td>
-                        <td>requiRe</td>
-                        <td>surf_utopia_v3</td>
-                        <td>00:55:00.300</td>
+                <tbody *ngIf="surfLeaderboard$ | async">
+                    <tr *ngFor="let item of (surfLeaderboard$ | async)?.data?.playerLeaderboard?.points; index as i"
+                        [style.color]="getPlaceColor(i+1)">
+                        <td>
+                            <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                        </td>
+                        <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
+                                [title]="item.country"> {{ item.name }}</td>
+                        <td>{{ item.points }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>USER</th>
+                        <th>FINISHED MAPS</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="surfLeaderboard$ | async">
+                    <tr *ngFor="let item of (surfLeaderboard$ | async)?.data?.playerLeaderboard?.finishedMaps; index as i"
+                        [style.color]="getPlaceColor(i+1)">
+                        <td>
+                            <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                        </td>
+                        <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
+                                [title]="item.country"> {{ item.name }}</td>
+                        <td>{{ item.finishedMaps }}</td>
                     </tr>
                 </tbody>
             </table>

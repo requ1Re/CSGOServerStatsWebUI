@@ -38,7 +38,7 @@ export class ConfigUtil {
     API_BASE_URL: 'http://localhost:8000/v1',
   };
 
-  getFlagImagePath(countryCode: string): string {
+  public static getFlagImagePath(countryCode: string): string {
     return `assets/img/flags/${countryCode.toLowerCase()}.svg`;
   }
 }

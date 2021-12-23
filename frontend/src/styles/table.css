@@ -13,3 +13,6 @@ table > tbody > tr > td {
 table > tbody > tr:hover {
     @apply bg-zinc-800;
 }
+td img {
+    @apply object-cover h-5;
+}
