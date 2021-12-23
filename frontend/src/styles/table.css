@@ -1,12 +1,15 @@
 table {
-    @apply bg-zinc-900 shadow-lg text-gray-300 table-auto text-left w-full;
+    @apply bg-zinc-900 shadow-lg text-gray-300 table-auto text-left w-full rounded-lg;
 }
 table > thead > tr {
-    @apply bg-zinc-800;
+    @apply border-b-2 border-zinc-800;
 }
 table > thead > tr > th {
-    @apply px-5 py-2;
+    @apply px-5 py-2 font-bold;
 }
 table > tbody > tr > td {
     @apply px-5 py-3;
+}
+table > tbody > tr:hover {
+    @apply bg-zinc-800;
 }
