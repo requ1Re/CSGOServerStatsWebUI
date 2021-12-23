@@ -22,7 +22,10 @@ body {
 
 a:hover {
     text-decoration: underline;
-    text-decoration-color: rgba(234,27,90,1);
+    text-decoration-color: var(--color-1337fm-logo-color);
     text-underline-offset: 1px;
     text-decoration-thickness: 2px;
+}
+.action-icon:hover {
+    color: var(--color-1337fm-logo-color);
 }

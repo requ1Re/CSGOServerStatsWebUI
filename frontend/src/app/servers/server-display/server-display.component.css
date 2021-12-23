@@ -1,7 +1,12 @@
 .gameserver {
     @apply px-5 py-20 bg-blend-overlay text-white;
 
-    background-size: cover;
+    background-size: 100% 100%;
+    background-position: center;
+    transition: all 200ms ease-in-out;
+}
+.gameserver:hover {
+    background-size: 125% 125%;
 }
 .server-name {
     @apply text-3xl;

@@ -1,13 +1,13 @@
 <div class="gameserver bg-neutral-800 rounded shadow-lg flex flex-col justify-center items-center space-y-2"
-        [style.backgroundImage]="'url(\'' + getServerImage(server) + '\')'">
-        <p class="server-name">{{ server.name }}</p>
-        <p>{{ server.ip }}</p>
-        <div class="flex flex-row justify-center space-x-5">
-            <a href="javascript:void()" (click)="copyToClipboard(server.ip)" title="Copy IP to clipboard">
-                <fa-icon [icon]="faCopy"></fa-icon>
-            </a>
-            <a [href]="'steam://connect/' + server.ip | safeUrl" title="Connect to server">
-                <fa-icon [icon]="faPlayCircle"></fa-icon>
-            </a>
-        </div>
+    [style.backgroundImage]="'url(\'' + getServerImage(server) + '\')'">
+    <p class="server-name">{{ server.name }}</p>
+    <p>{{ server.ip }}</p>
+    <div class="flex flex-row justify-center space-x-5">
+        <a href="javascript:void()" (click)="copyToClipboard(server.ip)" class="action-icon" title="Copy IP to clipboard">
+            <fa-icon [icon]="faCopy"></fa-icon>
+        </a>
+        <a [href]="'steam://connect/' + server.ip | safeUrl" class="action-icon" title="Connect to server">
+            <fa-icon [icon]="faPlayCircle"></fa-icon>
+        </a>
     </div>
+</div>
