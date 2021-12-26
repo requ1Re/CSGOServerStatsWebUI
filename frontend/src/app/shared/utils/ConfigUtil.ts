@@ -31,7 +31,7 @@ export class ConfigUtil {
         faIcon: faServer,
       },
       {
-        name: 'Statistics',
+        name: 'Statistics/Leaderboards',
         url: ['/stats'],
         faIcon: faChartBar,
       },

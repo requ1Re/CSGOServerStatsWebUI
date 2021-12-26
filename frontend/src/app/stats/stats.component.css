@@ -1,0 +1,6 @@
+.active-link {
+    text-decoration: underline;
+    text-decoration-color: var(--color-1337fm-logo-color);
+    text-underline-offset: 1px;
+    text-decoration-thickness: 2px;
+}
