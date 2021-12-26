@@ -1,5 +1,6 @@
 import { faChartBar } from '@fortawesome/free-regular-svg-icons';
 import { faServer } from '@fortawesome/free-solid-svg-icons';
+import { FooterItem } from '../models/FooterItem';
 import { Gamemode } from '../models/Gamemode';
 import { Gameserver } from '../models/Gameserver';
 import { NavbarItem } from '../models/NavbarItem';
@@ -35,6 +36,23 @@ export class ConfigUtil {
         faIcon: faChartBar,
       },
     ],
+    FOOTER_ITEMS: [
+      {
+        name: "1337Frankfurt.de",
+        url: ["https://1337frankfurt.de"],
+        routerLink: false,
+      },
+      {
+        name: "Bans",
+        url: ["https://bans.require.lol"],
+        routerLink: false
+      },
+      {
+        name: "Open Source Licenses",
+        url: ["/info/license"],
+        routerLink: true
+      }
+    ],
     API_BASE_URL: 'http://localhost:8000/v1',
   };
 
@@ -46,5 +64,6 @@ export class ConfigUtil {
 export interface Globals {
   SERVERS: Gameserver[];
   NAVBAR_ITEMS: NavbarItem[];
+  FOOTER_ITEMS: FooterItem[];
   API_BASE_URL: string;
 }

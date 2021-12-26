@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { ConfigUtil } from '../../utils/ConfigUtil';
 
 @Component({
   selector: 'app-footer',
@@ -12,9 +13,15 @@ export class FooterComponent implements OnInit {
   faFacebook = faFacebook;
   faInstagram = faInstagram;
 
+  footerItems = ConfigUtil.GLOBALS.FOOTER_ITEMS;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  showSeperator(index: number): boolean {
+    return index !== this.footerItems.length - 1;
   }
 
 }
