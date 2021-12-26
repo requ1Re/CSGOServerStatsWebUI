@@ -21,16 +21,23 @@
                             <th>POINTS</th>
                         </tr>
                     </thead>
-                    <tbody *ngIf="surfLeaderboard$ | async">
-                        <tr *ngFor="let item of (surfLeaderboard$ | async)?.data?.playerLeaderboard?.points; index as i"
-                            [style.color]="getPlaceColor(i+1)">
-                            <td>
-                                <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
-                            </td>
-                            <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
-                                    [title]="item.country"> {{ item.name }}</td>
-                            <td>{{ item.points }}</td>
-                        </tr>
+                    <tbody>
+                        <ng-container *ngIf="surfLeaderboard$ | async as leaderboard; else loading">
+                            <tr *ngFor="let item of getPointsLeaderboardForDisplay(leaderboard); index as i"
+                                [style.color]="getPlaceColor(i+1)">
+                                <td>
+                                    <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                                </td>
+                                <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
+                                        [title]="item.country"> {{ item.name }}</td>
+                                <td>{{ item.points }}</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #loading>
+                            <tr>
+                                <td colspan="3" class="text-center">Loading...</td>
+                            </tr>
+                        </ng-template>
                     </tbody>
                 </table>
             </div>
@@ -48,18 +55,92 @@
                             <th>FINISHED MAPS</th>
                         </tr>
                     </thead>
-                    <tbody *ngIf="surfLeaderboard$ | async">
-                        <tr *ngFor="let item of (surfLeaderboard$ | async)?.data?.playerLeaderboard?.finishedMaps; index as i"
-                            [style.color]="getPlaceColor(i+1)">
-                            <td>
-                                <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
-                            </td>
-                            <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
-                                    [title]="item.country"> {{ item.name }}</td>
-                            <td>{{ item.finishedMaps }}</td>
-                        </tr>
+                    <tbody>
+                        <ng-container *ngIf="surfLeaderboard$ | async as leaderboard; else loading">
+                            <tr *ngFor="let item of getFinishedMapsLeaderboardForDisplay(leaderboard); index as i"
+                                [style.color]="getPlaceColor(i+1)">
+                                <td>
+                                    <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                                </td>
+                                <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
+                                        [title]="item.country"> {{
+                                    item.name }}</td>
+                                <td>{{ item.finishedMaps }}</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #loading>
+                            <tr>
+                                <td colspan="3" class="text-center">Loading...</td>
+                            </tr>
+                        </ng-template>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="mt-10 flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
+            <div class="flex-1">
+                <div class="text-lg font-extrabold mb-2">
+                    <span class="gradient-text-1337ffm">
+                        Server Records
+                    </span>
+                </div>
+                <ng-container *ngIf="!viewTopTen; else topTen">
+                    <span class="text-white">Click on the name of a map to view the Top10 list.</span>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>MAP NAME</th>
+                                <th>RECORD BY</th>
+                                <th>TIME</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="surfLeaderboard$ | async as leaderboard; else loading">
+                                <tr *ngFor="let item of getMapLeaderboardForDisplay(leaderboard); index as i">
+                                    <td><a href="javascript:void()" title="View Top 10"
+                                            (click)="showMapLeaderboard(item.mapName)">{{ item.mapName }}</a></td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ formatTime(item.time) }}</td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #loading>
+                                <tr>
+                                    <td colspan="3" class="text-center">Loading...</td>
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </ng-container>
+                <ng-template #topTen>
+                    <span class="text-white">Viewing Top10 for map <i>{{ topTenMap }}</i></span>
+                    <button class="ml-2" (click)="viewTopTen = false">Back</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>USER</th>
+                                <th>TIME</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="surfMapLeaderboard$ | async as leaderboard; else loading">
+                                <tr *ngFor="let item of getSpecificMapLeaderboardForDisplay((surfMapLeaderboard$ | async)); index as i"
+                                    [style.color]="getPlaceColor(i+1)">
+                                    <td>
+                                        <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                                    </td>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ formatTime(item.time) }}</td>
+                                </tr>
+                            </ng-container>
+                            <ng-template #loading>
+                                <tr>
+                                    <td colspan="4" class="text-center">Loading...</td>
+                                </tr>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </ng-template>
             </div>
         </div>
     </div>

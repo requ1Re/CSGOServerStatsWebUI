@@ -1,7 +1,7 @@
 import { APIWrapper } from './APIWrapper';
 
 export interface SurfLeaderboard extends APIWrapper<SurfLeaderboardData> {}
-export interface SurfMapLeaderboard extends APIWrapper<MapLeaderboard> {}
+export interface SurfMapLeaderboard extends APIWrapper<MapLeaderboard[]> {}
 
 export interface SurfLeaderboardData {
   mapLeaderboard: MapLeaderboard[];

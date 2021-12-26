@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { APIWrapper } from '../models/APIWrapper';
-import { SurfLeaderboard } from '../models/SurfLeaderboard';
+import { SurfLeaderboard, SurfMapLeaderboard } from '../models/SurfLeaderboard';
 import { ConfigUtil } from '../utils/ConfigUtil';
 
 @Injectable({
@@ -16,6 +16,12 @@ export class APIService {
   public getSurfLeaderboard(): Observable<SurfLeaderboard> {
     return this.http.get<SurfLeaderboard>(
       `${this.apiBaseUrl}/server/surf/leaderboard`
+    );
+  }
+
+  public getSurfMapLeaderboard(mapName: string): Observable<SurfMapLeaderboard> {
+    return this.http.get<SurfMapLeaderboard>(
+      `${this.apiBaseUrl}/server/surf/leaderboard/map/${mapName}`
     );
   }
 }
