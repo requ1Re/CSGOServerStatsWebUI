@@ -1,5 +1,5 @@
 import { faChartBar } from '@fortawesome/free-regular-svg-icons';
-import { faServer } from '@fortawesome/free-solid-svg-icons';
+import { faClipboardList, faServer } from '@fortawesome/free-solid-svg-icons';
 import { FooterItem } from '../models/FooterItem';
 import { Gamemode } from '../models/Gamemode';
 import { Gameserver } from '../models/Gameserver';
@@ -31,9 +31,9 @@ export class ConfigUtil {
         faIcon: faServer,
       },
       {
-        name: 'Statistics/Leaderboards',
-        url: ['/stats'],
-        faIcon: faChartBar,
+        name: 'Leaderboard',
+        url: ['/leaderboard'],
+        faIcon: faClipboardList,
       },
     ],
     FOOTER_ITEMS: [

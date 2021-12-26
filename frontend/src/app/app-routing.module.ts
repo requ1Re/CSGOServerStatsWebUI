@@ -14,7 +14,7 @@ const routes: Routes = [
       import('./servers/servers.module').then((m) => m.ServersModule),
   },
   {
-    path: 'stats',
+    path: 'leaderboard',
     component: StatsComponent,
     loadChildren: () =>
       import('./stats/stats.module').then((m) => m.StatsModule),
