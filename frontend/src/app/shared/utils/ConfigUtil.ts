@@ -40,17 +40,17 @@ export class ConfigUtil {
       {
         name: "1337Frankfurt.de",
         url: ["https://1337frankfurt.de"],
-        routerLink: false,
+        external: true,
       },
       {
         name: "Bans",
         url: ["https://bans.require.lol"],
-        routerLink: false
+        external: true
       },
       {
         name: "Open Source Licenses",
         url: ["/info/license"],
-        routerLink: true
+        external: false
       }
     ],
     API_BASE_URL: 'http://localhost:8000/v1',

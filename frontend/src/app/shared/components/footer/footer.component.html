@@ -2,11 +2,11 @@
     <div class="relative flex items-center justify-between h-16">
         <div class="flex-1 flex items-stretch justify-start">
             <ng-container *ngFor="let item of footerItems; index as i">
-                <ng-container *ngIf="item.routerLink; else externalLink">
-                    <a [routerLink]="item.url">{{ item.name }}</a>
+                <ng-container *ngIf="item.external; else externalLink">
+                    <a [href]="item.url[0]" target="_blank">{{ item.name }}</a>
                 </ng-container>
                 <ng-template #externalLink>
-                    <a [href]="item.url[0]" target="_blank">{{ item.name }}</a>
+                    <a [routerLink]="item.url">{{ item.name }}</a>
                 </ng-template>
                 <span *ngIf="showSeperator(i)">
                     &nbsp;&bullet;&nbsp;
