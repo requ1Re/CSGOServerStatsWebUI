@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { AppError } from '../models/AppError';
 
@@ -8,7 +9,13 @@ import { AppError } from '../models/AppError';
 export class ErrorService {
   errors = new BehaviorSubject<AppError[]>([]);
 
-  constructor() {}
+  constructor(router: Router) {
+    router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.clearErrors();
+      }
+    });
+  }
 
   setErrors(errors: AppError[]) {
     this.errors.next(errors);
