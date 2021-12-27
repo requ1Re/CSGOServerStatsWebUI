@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngIf="surfLeaderboard$ | async as leaderboard; else loading">
+                        <ng-container *ngIf="surfLeaderboard as leaderboard; else loading">
                             <tr *ngFor="let item of getPointsLeaderboardForDisplay(leaderboard); index as i"
                                 [style.color]="getPlaceColor(i+1)">
                                 <td>
@@ -56,7 +56,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <ng-container *ngIf="surfLeaderboard$ | async as leaderboard; else loading">
+                        <ng-container *ngIf="surfLeaderboard as leaderboard; else loading">
                             <tr *ngFor="let item of getFinishedMapsLeaderboardForDisplay(leaderboard); index as i"
                                 [style.color]="getPlaceColor(i+1)">
                                 <td>
@@ -95,7 +95,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <ng-container *ngIf="surfLeaderboard$ | async as leaderboard; else loading">
+                            <ng-container *ngIf="surfLeaderboard as leaderboard; else loading">
                                 <tr *ngFor="let item of getMapLeaderboardForDisplay(leaderboard); index as i">
                                     <td><a href="javascript:void()" title="View Top 10"
                                             (click)="showMapLeaderboard(item.mapName)">{{ item.mapName }}</a></td>
@@ -123,8 +123,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <ng-container *ngIf="surfMapLeaderboard$ | async as leaderboard; else loading">
-                                <tr *ngFor="let item of getSpecificMapLeaderboardForDisplay((surfMapLeaderboard$ | async)); index as i"
+                            <ng-container *ngIf="surfMapLeaderboard as leaderboard; else loading">
+                                <tr *ngFor="let item of getSpecificMapLeaderboardForDisplay(leaderboard); index as i"
                                     [style.color]="getPlaceColor(i+1)">
                                     <td>
                                         <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}

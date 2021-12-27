@@ -11,3 +11,12 @@
     padding: 25px;
     width: 100%;
 }
+.error {
+    @apply bg-red-600 p-3 rounded shadow text-white;
+    margin-bottom: 25px;
+}
+.error li {
+    @apply pl-4;
+    list-style-type: circle;
+    list-style-position: inside;
+}

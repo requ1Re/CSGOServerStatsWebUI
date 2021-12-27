@@ -7,6 +7,8 @@ import { APIService } from 'src/app/shared/services/APIService';
 import { ConfigUtil } from 'src/app/shared/utils/ConfigUtil';
 import * as lookup from 'country-code-lookup';
 import { BaseComponent } from 'src/app/shared/components/base/base.component';
+import { ErrorService } from 'src/app/shared/services/ErrorService';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-surf-stats',
@@ -14,8 +16,8 @@ import { BaseComponent } from 'src/app/shared/components/base/base.component';
   styleUrls: ['./surf-stats.component.css'],
 })
 export class SurfStatsComponent extends BaseComponent implements OnInit {
-  surfLeaderboard$: Observable<SurfLeaderboard>;
-  surfMapLeaderboard$: Observable<SurfMapLeaderboard>;
+  surfLeaderboard: SurfLeaderboard;
+  surfMapLeaderboard: SurfMapLeaderboard;
 
   maps: string[];
 
@@ -24,18 +26,19 @@ export class SurfStatsComponent extends BaseComponent implements OnInit {
 
   faTrophy = faTrophy;
 
-  constructor(private api: APIService) {
+  constructor(private api: APIService, private errorService: ErrorService) {
     super();
   }
 
   ngOnInit(): void {
-    this.surfLeaderboard$ = this.api.getSurfLeaderboard();
-
-    this.register(this.surfLeaderboard$.subscribe((data => {
-      if(data && data.success && data.data){
-        this.maps = data.data.mapLeaderboard.map(map => map.mapName);
-      }
-    })));
+    this.register(
+      this.api.getSurfLeaderboard().subscribe((leaderboard) => {
+        this.surfLeaderboard = leaderboard;
+        if (leaderboard && leaderboard.success && leaderboard.data) {
+          this.maps = leaderboard.data.mapLeaderboard.map((map) => map.mapName);
+        }
+      })
+    );
   }
 
   getCountryFlagByName(countryName: string | undefined): string {
@@ -100,7 +103,11 @@ export class SurfStatsComponent extends BaseComponent implements OnInit {
   }
 
   loadMapLeaderboard(mapName: string) {
-    this.surfMapLeaderboard$ = this.api.getSurfMapLeaderboard(mapName);
+    this.register(
+      this.api.getSurfMapLeaderboard(mapName).subscribe((leaderboard) => {
+        this.surfMapLeaderboard = leaderboard;
+      })
+    );
   }
 
   getSpecificMapLeaderboardForDisplay(leaderboard: SurfMapLeaderboard|null): MapLeaderboard[] {
