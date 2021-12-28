@@ -1,21 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { faTrophy, faMedal, faAward } from '@fortawesome/free-solid-svg-icons';
-import { Observable, Subscription } from 'rxjs';
 import { FinishedMapsLeaderboardEntry, MapLeaderboard, PointsLeaderboardEntry, SurfLeaderboard, SurfMapLeaderboard } from 'src/app/shared/models/SurfLeaderboard';
 import { APIService } from 'src/app/shared/services/APIService';
 import { ConfigUtil } from 'src/app/shared/utils/ConfigUtil';
 import * as lookup from 'country-code-lookup';
-import { BaseComponent } from 'src/app/shared/components/base/base.component';
 import { ErrorService } from 'src/app/shared/services/ErrorService';
-import { HttpErrorResponse } from '@angular/common/http';
+import { StatsBaseComponent } from 'src/app/shared/components/stats-base/stats-base.component';
 
 @Component({
   selector: 'app-surf-stats',
   templateUrl: './surf-stats.component.html',
   styleUrls: ['./surf-stats.component.css'],
 })
-export class SurfStatsComponent extends BaseComponent implements OnInit {
+export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
   surfLeaderboard: SurfLeaderboard;
   surfMapLeaderboard: SurfMapLeaderboard;
 
@@ -26,7 +24,7 @@ export class SurfStatsComponent extends BaseComponent implements OnInit {
 
   faTrophy = faTrophy;
 
-  constructor(private api: APIService, private errorService: ErrorService) {
+  constructor(private api: APIService) {
     super();
   }
 
@@ -39,40 +37,6 @@ export class SurfStatsComponent extends BaseComponent implements OnInit {
         }
       })
     );
-  }
-
-  getCountryFlagByName(countryName: string | undefined): string {
-    const unknownCountryCode = 'xx';
-    return ConfigUtil.getFlagImagePath(
-      countryName
-        ? lookup.byCountry(countryName)?.iso2 ?? unknownCountryCode
-        : unknownCountryCode
-    );
-  }
-
-  getPlaceColor(place: number): string {
-    switch (place) {
-      case 1:
-        return 'gold';
-      case 2:
-        return 'darkgray';
-      case 3:
-        return '#bf8970';
-      default:
-        return 'white';
-    }
-  }
-
-  getPlaceIcon(place: number): IconDefinition {
-    switch (place) {
-      case 1:
-        return faTrophy;
-      case 2:
-      case 3:
-        return faMedal;
-      default:
-        return faAward;
-    }
   }
 
   getPointsLeaderboardForDisplay(leaderboard: SurfLeaderboard|null): PointsLeaderboardEntry[] {
@@ -115,24 +79,5 @@ export class SurfStatsComponent extends BaseComponent implements OnInit {
       return leaderboard.data;
     }
     return [];
-  }
-
-  formatTime(timeInSeconds: any) {
-    let time: any = parseFloat(timeInSeconds).toFixed(3);
-    let minutes = Math.floor(time / 60) % 60;
-    let seconds = Math.floor(time - minutes * 60);
-    let milliseconds = time.slice(-3);
-
-    return (
-      this.pad(minutes, 2) +
-      ':' +
-      this.pad(seconds, 2) +
-      '.' +
-      this.pad(milliseconds, 3)
-    );
-  }
-
-  pad(num: any, size: any) {
-    return ('000' + num).slice(size * -1);
   }
 }
