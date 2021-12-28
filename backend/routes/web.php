@@ -25,7 +25,9 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
             $router->get('stats/player/{steamId}', ['uses' => 'StatsController@showSurfPlayer']);
         });
         $router->group(['prefix' => 'kz'], function () use ($router) {
-            $router->get('stats', ['uses' => 'StatsController@showKZ']);
+            $router->get('leaderboard', ['uses' => 'StatsController@showKZ']);
+            $router->get('leaderboard/map/{map_name}', ['uses' => 'StatsController@showKZMap']);
+            $router->get('stats/player/{steamId}', ['uses' => 'StatsController@showKZPlayer']);
         });
         $router->group(['prefix' => 'retake'], function () use ($router) {
             $router->get('stats', ['uses' => 'StatsController@showRetake']);

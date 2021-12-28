@@ -6,7 +6,6 @@ class StatsController extends Controller
 {
     public function showSurf()
     {
-
         $obj = new \StdClass();
         $obj->mapLeaderboard = app('db')->connection('surf')->table('ck_playertimes')
             ->select('steamid AS steamId', 'mapname AS mapName', 'name', 'runtimepro AS time')
@@ -84,6 +83,53 @@ class StatsController extends Controller
             $wrapper->data = null;
         }
 
+
+        return response()->json($wrapper);
+    }
+
+    public function showKZ()
+    {
+        $obj = new \StdClass();
+
+        $objMapLeaderboard = new \StdClass();
+        $objMapLeaderboard->tp = app('db')->connection('kz')->table('playertimes')
+            ->select('steamid AS steamId', 'mapname AS mapName', 'name', 'runtime AS time', 'teleports AS teleports')
+            ->where('runtime', '>', -1)
+            ->orderBy('time', 'asc')->get()->unique('mapName')->values()->all();
+
+        $objMapLeaderboard->pro = app('db')->connection('kz')->table('playertimes')
+            ->select('steamid AS steamId', 'mapname AS mapName', 'name', 'runtimepro AS time')
+            ->where('runtimepro', '>', -1)
+            ->orderBy('time', 'asc')->get()->unique('mapName')->values()->all();
+
+        $obj->mapLeaderboard = $objMapLeaderboard;
+
+        $objPlayerLeaderboard = new \StdClass();
+        $objPlayerLeaderboard->points = app('db')->connection('kz')->table('playerrank')
+            ->select('steamid AS steamId', 'name', 'country', 'points')
+            ->orderBy('points', 'desc')->limit(10)->get();
+
+        $objPlayerLeaderboard->finishedMaps = app('db')->connection('kz')->table('playerrank')
+            ->select(
+                'steamid AS steamId',
+                'name',
+                'country',
+                'finishedmaps AS finishedMaps',
+                'finishedmapstp AS finishedMapsTP',
+                'finishedmapspro AS finishedMapsPro'
+            )
+            ->orderBy('finishedMaps', 'desc')->limit(10)->get();
+
+        $obj->playerLeaderboard = $objPlayerLeaderboard;
+
+        $wrapper = new \StdClass();
+        if ($obj->mapLeaderboard && $obj->playerLeaderboard) {
+            $wrapper->success = true;
+            $wrapper->data = $obj;
+        } else {
+            $wrapper->success = false;
+            $wrapper->data = null;
+        }
 
         return response()->json($wrapper);
     }
