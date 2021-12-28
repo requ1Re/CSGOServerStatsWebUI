@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
-import { faTrophy, faMedal, faAward } from '@fortawesome/free-solid-svg-icons';
-import { FinishedMapsLeaderboardEntry, MapLeaderboard, PointsLeaderboardEntry, SurfLeaderboard, SurfMapLeaderboard } from 'src/app/shared/models/SurfLeaderboard';
+import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { APIService } from 'src/app/shared/services/APIService';
-import { ConfigUtil } from 'src/app/shared/utils/ConfigUtil';
-import * as lookup from 'country-code-lookup';
-import { ErrorService } from 'src/app/shared/services/ErrorService';
 import { StatsBaseComponent } from 'src/app/shared/components/stats-base/stats-base.component';
+import { SurfStats } from 'src/app/shared/models/SurfLeaderboard';
 
 @Component({
   selector: 'app-surf-stats',
@@ -14,8 +10,8 @@ import { StatsBaseComponent } from 'src/app/shared/components/stats-base/stats-b
   styleUrls: ['./surf-stats.component.css'],
 })
 export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
-  surfLeaderboard: SurfLeaderboard;
-  surfMapLeaderboard: SurfMapLeaderboard;
+  surfLeaderboard: SurfStats.Leaderboard;
+  surfMapLeaderboard: SurfStats.MapLeaderboard;
 
   maps: string[];
 
@@ -39,21 +35,21 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
     );
   }
 
-  getPointsLeaderboardForDisplay(leaderboard: SurfLeaderboard|null): PointsLeaderboardEntry[] {
+  getPointsLeaderboardForDisplay(leaderboard: SurfStats.Leaderboard|null): SurfStats.PointsLeaderboardEntry[] {
     if(leaderboard && leaderboard.success && leaderboard.data){
       return leaderboard.data.playerLeaderboard.points;
     }
     return [];
   }
 
-  getFinishedMapsLeaderboardForDisplay(leaderboard: SurfLeaderboard|null): FinishedMapsLeaderboardEntry[] {
+  getFinishedMapsLeaderboardForDisplay(leaderboard: SurfStats.Leaderboard|null): SurfStats.FinishedMapsLeaderboardEntry[] {
     if(leaderboard && leaderboard.success && leaderboard.data){
       return leaderboard.data.playerLeaderboard.finishedMaps;
     }
     return [];
   }
 
-  getMapLeaderboardForDisplay(leaderboard: SurfLeaderboard|null): MapLeaderboard[] {
+  getMapLeaderboardForDisplay(leaderboard: SurfStats.Leaderboard|null): SurfStats.MapLeaderboardData[] {
     if(leaderboard && leaderboard.success && leaderboard.data){
       return leaderboard.data.mapLeaderboard;
     }
@@ -74,7 +70,7 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
     );
   }
 
-  getSpecificMapLeaderboardForDisplay(leaderboard: SurfMapLeaderboard|null): MapLeaderboard[] {
+  getSpecificMapLeaderboardForDisplay(leaderboard: SurfStats.MapLeaderboard|null): SurfStats.MapLeaderboardData[] {
     if(leaderboard && leaderboard.success && leaderboard.data){
       return leaderboard.data;
     }

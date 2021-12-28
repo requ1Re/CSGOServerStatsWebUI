@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { SurfLeaderboard, SurfMapLeaderboard } from '../models/SurfLeaderboard';
+import { SurfStats } from '../models/SurfLeaderboard';
 import { ConfigUtil } from '../utils/ConfigUtil';
 import { ErrorService } from './ErrorService';
 
@@ -14,9 +14,9 @@ export class APIService {
 
   private readonly apiBaseUrl: string = ConfigUtil.GLOBALS.API_BASE_URL;
 
-  public getSurfLeaderboard(): Observable<SurfLeaderboard> {
+  public getSurfLeaderboard(): Observable<SurfStats.Leaderboard> {
     return this.http
-      .get<SurfLeaderboard>(`${this.apiBaseUrl}/server/surf/leaderboard`)
+      .get<SurfStats.Leaderboard>(`${this.apiBaseUrl}/server/surf/leaderboard`)
       .pipe(
         catchError((err: HttpErrorResponse) => {
           this.errorService.addError({ message: err.message });
@@ -25,9 +25,9 @@ export class APIService {
       );
   }
 
-  public getSurfMapLeaderboard(mapName: string): Observable<SurfMapLeaderboard> {
+  public getSurfMapLeaderboard(mapName: string): Observable<SurfStats.MapLeaderboard> {
     return this.http
-      .get<SurfMapLeaderboard>(
+      .get<SurfStats.MapLeaderboard>(
         `${this.apiBaseUrl}/server/surf/leaderboard/map/${mapName}`
       )
       .pipe(
