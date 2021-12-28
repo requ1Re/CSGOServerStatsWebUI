@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { KZStats } from '../models/KZLeaderboard';
 import { SurfStats } from '../models/SurfLeaderboard';
 import { ConfigUtil } from '../utils/ConfigUtil';
 import { ErrorService } from './ErrorService';
@@ -30,6 +31,17 @@ export class APIService {
       .get<SurfStats.MapLeaderboard>(
         `${this.apiBaseUrl}/server/surf/leaderboard/map/${mapName}`
       )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          this.errorService.addError({ message: err.message });
+          return throwError(err);
+        })
+      );
+  }
+
+  public getKZLeaderboard(): Observable<KZStats.Leaderboard> {
+    return this.http
+      .get<KZStats.Leaderboard>(`${this.apiBaseUrl}/server/kz/leaderboard`)
       .pipe(
         catchError((err: HttpErrorResponse) => {
           this.errorService.addError({ message: err.message });

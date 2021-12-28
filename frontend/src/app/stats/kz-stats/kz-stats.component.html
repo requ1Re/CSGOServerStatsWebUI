@@ -1,13 +1,148 @@
 <div class="flex flex-col space-y-5 mt-7">
     <div>
-        <div class="text-3xl font-extrabold mb-2">
+        <div class="text-4xl font-extrabold mb-2">
             <span class="gradient-text-1337ffm">
                 KZ
             </span>
         </div>
 
         <div class="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
-            <h1 class="text-white">Coming Soon</h1>
+            <div class="flex-1">
+                <div class="text-lg font-extrabold mb-2">
+                    <span class="gradient-text-1337ffm">
+                        Most Points
+                    </span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>USER</th>
+                            <th>POINTS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
+                            <tr *ngFor="let item of getPointsLeaderboardForDisplay(leaderboard); index as i"
+                                [style.color]="getPlaceColor(i+1)">
+                                <td>
+                                    <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                                </td>
+                                <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
+                                        [title]="item.country"> {{ item.name }}</td>
+                                <td>{{ item.points }}</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #loading>
+                            <tr>
+                                <td colspan="3" class="text-center">Loading...</td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex-1">
+                <div class="text-lg font-extrabold mb-2">
+                    <span class="gradient-text-1337ffm">
+                        Most Finished Maps
+                    </span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>USER</th>
+                            <th>FINISHED MAPS (PRO/TP)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
+                            <tr *ngFor="let item of getFinishedMapsLeaderboardForDisplay(leaderboard); index as i"
+                                [style.color]="getPlaceColor(i+1)">
+                                <td>
+                                    <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                                </td>
+                                <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
+                                        [title]="item.country"> {{
+                                    item.name }}</td>
+                                <td>{{ item.finishedMaps }} ({{ item.finishedMapsPro }}/{{ item.finishedMapsTP }})</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #loading>
+                            <tr>
+                                <td colspan="3" class="text-center">Loading...</td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="mt-10 flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
+            <div class="flex-1">
+                <div class="text-lg font-extrabold mb-2">
+                    <span class="gradient-text-1337ffm">
+                        Server Records (PRO/NO TP)
+                    </span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>MAP NAME</th>
+                            <th>RECORD BY</th>
+                            <th>TIME</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
+                            <tr *ngFor="let item of getMapProLeaderboardForDisplay(leaderboard); index as i">
+                                <td>{{ item.mapName }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.time }}</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #loading>
+                            <tr>
+                                <td colspan="3" class="text-center">Loading...</td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex-1">
+                <div class="text-lg font-extrabold mb-2">
+                    <span class="gradient-text-1337ffm">
+                        Server Records (TP)
+                    </span>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>MAP NAME</th>
+                            <th>RECORD BY</th>
+                            <th>TIME</th>
+                            <th>TELEPORTS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
+                            <tr *ngFor="let item of getMapTPLeaderboardForDisplay(leaderboard); index as i">
+                                <td>{{ item.mapName }}</td>
+                                <td>{{ item.name }}</td>
+                                <td>{{ item.time }}</td>
+                                <td>{{ item.teleports }}</td>
+                            </tr>
+                        </ng-container>
+                        <ng-template #loading>
+                            <tr>
+                                <td colspan="3" class="text-center">Loading...</td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    
+                </div>
+            </div>
         </div>
     </div>
 </div>
