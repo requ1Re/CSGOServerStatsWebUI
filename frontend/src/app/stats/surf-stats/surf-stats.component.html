@@ -29,7 +29,7 @@
                                     <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
                                 </td>
                                 <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
-                                        [title]="item.country"> {{ item.name }}</td>
+                                        [title]="item.country"> {{ isEmpty(item.name) ? item.steamId : item.name }}</td>
                                 <td>{{ item.points }}</td>
                             </tr>
                         </ng-container>
@@ -63,8 +63,7 @@
                                     <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
                                 </td>
                                 <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
-                                        [title]="item.country"> {{
-                                    item.name }}</td>
+                                        [title]="item.country"> {{ isEmpty(item.name) ? item.steamId : item.name }}</td>
                                 <td>{{ item.finishedMaps }}</td>
                             </tr>
                         </ng-container>
@@ -99,7 +98,7 @@
                                 <tr *ngFor="let item of getMapLeaderboardForDisplay(leaderboard); index as i">
                                     <td><a href="javascript:void()" title="View Top 10"
                                             (click)="showMapLeaderboard(item.mapName)">{{ item.mapName }}</a></td>
-                                    <td>{{ item.name }}</td>
+                                    <td>{{ isEmpty(item.name) ? item.steamId : item.name }}</td>
                                     <td>{{ formatTime(item.time) }}</td>
                                 </tr>
                             </ng-container>
@@ -129,7 +128,7 @@
                                     <td>
                                         <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
                                     </td>
-                                    <td>{{ item.name }}</td>
+                                    <td>{{ isEmpty(item.name) ? item.steamId : item.name }}</td>
                                     <td>{{ formatTime(item.time) }}</td>
                                 </tr>
                             </ng-container>

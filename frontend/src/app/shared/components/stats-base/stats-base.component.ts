@@ -15,9 +15,11 @@ export class StatsBaseComponent extends BaseComponent implements OnInit {
 
   getCountryFlagByName(countryName: string | undefined): string {
     const unknownCountryCode = 'xx';
+
+    const _countryName = countryName?.replace('The', '').trim();
     return ConfigUtil.getFlagImagePath(
-      countryName
-        ? lookup.byCountry(countryName)?.iso2 ?? unknownCountryCode
+      _countryName
+        ? lookup.byCountry(_countryName)?.iso2 ?? unknownCountryCode
         : unknownCountryCode
     );
   }
@@ -64,5 +66,9 @@ export class StatsBaseComponent extends BaseComponent implements OnInit {
 
   pad(num: any, size: any) {
     return ('000' + num).slice(size * -1);
+  }
+
+  isEmpty(str: string){
+    return !str || !str.trim();
   }
 }
