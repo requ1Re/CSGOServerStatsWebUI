@@ -1,0 +1,9 @@
+button {
+    @apply p-3 bg-zinc-900 text-white shadow-lg border-none;
+}
+button.active {
+    @apply bg-zinc-800;
+}
+button:hover {
+    @apply bg-zinc-800;
+}

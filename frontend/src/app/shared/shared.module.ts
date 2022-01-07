@@ -8,10 +8,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { BaseComponent } from './components/base/base.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent, SafeUrlPipe, BaseComponent],
+  declarations: [NavbarComponent, FooterComponent, SafeUrlPipe, BaseComponent, PaginationComponent],
   imports: [CommonModule, RouterModule, FontAwesomeModule, HttpClientModule],
-  exports: [NavbarComponent, FooterComponent, FontAwesomeModule, SafeUrlPipe, BaseComponent],
+  exports: [NavbarComponent, FooterComponent, FontAwesomeModule, SafeUrlPipe, BaseComponent, PaginationComponent],
 })
 export class SharedModule {}

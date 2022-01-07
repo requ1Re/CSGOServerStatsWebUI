@@ -1,0 +1,11 @@
+<div class="flex flex-row justify-center mt-5">
+    <button (click)="setPage(page-1)">
+        <<
+    </button>
+    <button *ngFor="let page of [].constructor(pages); let i = index" (click)="setPage(i+1)" [class.active]="isActive(i+1)">
+        {{ i+1 }}
+    </button>
+    <button (click)="setPage(page+1)">
+        >>
+    </button>
+</div>

@@ -94,7 +94,7 @@
                     </thead>
                     <tbody>
                         <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
-                            <tr *ngFor="let item of getMapProLeaderboardForDisplay(leaderboard); index as i">
+                            <tr *ngFor="let item of mapProLeaderboardPaginationUtil.getCurrentData(); index as i">
                                 <td>{{ item.mapName }}</td>
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.time }}</td>
@@ -107,6 +107,7 @@
                         </ng-template>
                     </tbody>
                 </table>
+                <app-pagination [pages]="mapProLeaderboardPaginationUtil.getPages()" (pageChanged)="mapProLeaderboardPaginationUtil.setPage($event)"></app-pagination>
             </div>
             <div class="flex-1">
                 <div class="text-lg font-extrabold mb-2">
@@ -125,7 +126,7 @@
                     </thead>
                     <tbody>
                         <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
-                            <tr *ngFor="let item of getMapTPLeaderboardForDisplay(leaderboard); index as i">
+                            <tr *ngFor="let item of mapTPLeaderboardPaginationUtil.getCurrentData(); index as i">
                                 <td>{{ item.mapName }}</td>
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.time }}</td>
@@ -139,9 +140,7 @@
                         </ng-template>
                     </tbody>
                 </table>
-                <div class="pagination">
-                    
-                </div>
+                <app-pagination [pages]="mapTPLeaderboardPaginationUtil.getPages()" (pageChanged)="mapTPLeaderboardPaginationUtil.setPage($event)"></app-pagination>
             </div>
         </div>
     </div>
