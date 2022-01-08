@@ -19,7 +19,7 @@ class CreateUsernamesTable extends Migration
             $table->id();
             $table->string('steam_id')->unique();
             $table->string('community_id')->unique();
-            $table->string('username');
+            $table->string('username')->charset('utf8mb4')->collation('utf8mb4_unicode_ci');
             $table->timestamps();
         });
     }
