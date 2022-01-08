@@ -3,6 +3,7 @@ import { faTrophy } from '@fortawesome/free-solid-svg-icons';
 import { APIService } from 'src/app/shared/services/APIService';
 import { StatsBaseComponent } from 'src/app/shared/components/stats-base/stats-base.component';
 import { SurfStats } from 'src/app/shared/models/SurfLeaderboard';
+import { PaginationUtil } from 'src/app/shared/utils/PaginationUtil';
 
 @Component({
   selector: 'app-surf-stats',
@@ -13,6 +14,8 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
   surfLeaderboard: SurfStats.Leaderboard;
   surfMapLeaderboard: SurfStats.MapLeaderboard;
 
+  mapLeaderboardPaginationUtil = new PaginationUtil<SurfStats.MapLeaderboardData[]>([]);
+  
   maps: string[];
 
   viewTopTen = false;
@@ -30,6 +33,7 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
         this.surfLeaderboard = leaderboard;
         if (leaderboard && leaderboard.success && leaderboard.data) {
           this.maps = leaderboard.data.mapLeaderboard.map((map) => map.mapName);
+          this.mapLeaderboardPaginationUtil.setData(leaderboard.data.mapLeaderboard);
         }
       })
     );
@@ -45,13 +49,6 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
   getFinishedMapsLeaderboardForDisplay(leaderboard: SurfStats.Leaderboard|null): SurfStats.FinishedMapsLeaderboardEntry[] {
     if(leaderboard && leaderboard.success && leaderboard.data){
       return leaderboard.data.playerLeaderboard.finishedMaps;
-    }
-    return [];
-  }
-
-  getMapLeaderboardForDisplay(leaderboard: SurfStats.Leaderboard|null): SurfStats.MapLeaderboardData[] {
-    if(leaderboard && leaderboard.success && leaderboard.data){
-      return leaderboard.data.mapLeaderboard;
     }
     return [];
   }

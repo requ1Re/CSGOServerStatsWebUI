@@ -95,7 +95,7 @@
                         </thead>
                         <tbody>
                             <ng-container *ngIf="surfLeaderboard as leaderboard; else loading">
-                                <tr *ngFor="let item of getMapLeaderboardForDisplay(leaderboard); index as i">
+                                <tr *ngFor="let item of mapLeaderboardPaginationUtil.getCurrentData(); index as i">
                                     <td><a href="javascript:void()" title="View Top 10"
                                             (click)="showMapLeaderboard(item.mapName)">{{ item.mapName }}</a></td>
                                     <td>{{ isEmpty(item.name) ? item.steamId : item.name }}</td>
@@ -109,6 +109,7 @@
                             </ng-template>
                         </tbody>
                     </table>
+                    <app-pagination [pages]="mapLeaderboardPaginationUtil.getPages()" (pageChanged)="mapLeaderboardPaginationUtil.setPage($event)"></app-pagination>
                 </ng-container>
                 <ng-template #topTen>
                     <span class="text-white">Viewing Top10 for map <i>{{ topTenMap }}</i></span>
