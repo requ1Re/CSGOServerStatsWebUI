@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Wrapper;
+
 class StatsController extends Controller
 {
     public function showSurf()
@@ -22,7 +24,7 @@ class StatsController extends Controller
 
         $obj->playerLeaderboard = $objPlayerLeaderboard;
 
-        $wrapper = new \StdClass();
+        $wrapper = new Wrapper();
         if ($obj->mapLeaderboard && $obj->playerLeaderboard) {
             $wrapper->success = true;
             $wrapper->data = $obj;
@@ -42,7 +44,7 @@ class StatsController extends Controller
             ->where('mapname', $map_name)
             ->orderBy('runtimepro', 'asc')->limit(10)->get();
 
-        $wrapper = new \StdClass();
+        $wrapper = new Wrapper();
         if ($data && count($data) > 0) {
             $wrapper->success = true;
             $wrapper->data = $data;
@@ -62,7 +64,7 @@ class StatsController extends Controller
             ->select('name', 'country', 'points', 'finishedmapspro AS finishedMaps')
             ->where('steamid', $steamId)->first();
 
-        $wrapper = new \StdClass();
+        $wrapper = new Wrapper();
 
         $obj = new \StdClass();
         if ($stats) {
@@ -122,7 +124,7 @@ class StatsController extends Controller
 
         $obj->playerLeaderboard = $objPlayerLeaderboard;
 
-        $wrapper = new \StdClass();
+        $wrapper = new Wrapper();
         if ($obj->mapLeaderboard && $obj->playerLeaderboard) {
             $wrapper->success = true;
             $wrapper->data = $obj;
