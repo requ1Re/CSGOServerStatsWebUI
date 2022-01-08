@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsBaseComponent } from 'src/app/shared/components/stats-base/stats-base.component';
 import { KZStats } from 'src/app/shared/models/KZLeaderboard';
-import { APIService } from 'src/app/shared/services/APIService';
+import { APIService } from 'src/app/shared/services/api.service';
 import { PaginationUtil } from 'src/app/shared/utils/PaginationUtil';
 
 @Component({

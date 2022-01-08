@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faTrophy } from '@fortawesome/free-solid-svg-icons';
-import { APIService } from 'src/app/shared/services/APIService';
+import { APIService } from 'src/app/shared/services/api.service';
 import { StatsBaseComponent } from 'src/app/shared/components/stats-base/stats-base.component';
 import { SurfStats } from 'src/app/shared/models/SurfLeaderboard';
 import { PaginationUtil } from 'src/app/shared/utils/PaginationUtil';
