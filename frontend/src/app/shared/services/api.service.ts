@@ -52,9 +52,9 @@ export class APIService {
       );
   }
 
-  public getUsers(steamIds: string[]): Observable<APIWrapper<UserData>> {
+  public getUsers(steamIds: string[]): Observable<APIWrapper<UserData[]>> {
     return this.http
-      .get<APIWrapper<UserData>>(`${this.apiBaseUrl}/users/${steamIds.join(',')}`)
+      .get<APIWrapper<UserData[]>>(`${this.apiBaseUrl}/users/${steamIds.join(',')}`)
       .pipe(
         catchError((err: HttpErrorResponse) => {
           this.errorService.addError({ message: err.message });
