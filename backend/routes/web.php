@@ -18,6 +18,9 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => 'v1'], function () use ($router) {
+    $router->get('cron/accounts', ['uses' => 'CronController@cronAccounts']);
+    $router->get('cron/names', ['uses' => 'CronController@cronNames']);
+
     $router->group(['prefix' => 'server'], function () use ($router) {
         $router->group(['prefix' => 'surf'], function () use ($router) {
             $router->get('leaderboard', ['uses' => 'StatsController@showSurf']);
