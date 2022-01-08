@@ -3,6 +3,7 @@ import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { faTrophy, faMedal, faAward } from '@fortawesome/free-solid-svg-icons';
 import * as lookup from 'country-code-lookup';
 import { ConfigUtil } from '../../utils/ConfigUtil';
+import { SteamIDUtil } from '../../utils/SteamIDUtil';
 import { BaseComponent } from '../base/base.component';
 
 @Component({template:''})
@@ -70,5 +71,10 @@ export class StatsBaseComponent extends BaseComponent implements OnInit {
 
   isEmpty(str: string){
     return !str || !str.trim();
+  }
+
+  
+  convertSteamIdToCommunityId(steamId: string): string {
+    return SteamIDUtil.convertSteamIdToCommunityId(steamId);
   }
 }

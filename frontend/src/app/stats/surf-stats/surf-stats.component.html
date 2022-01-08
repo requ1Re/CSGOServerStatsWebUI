@@ -29,7 +29,9 @@
                                     <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
                                 </td>
                                 <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
-                                        [title]="item.country"> {{ isEmpty(item.name) ? item.steamId : item.name }}</td>
+                                        [title]="item.country"> <a
+                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
+                                        isEmpty(item.name) ? item.steamId : item.name }}</a></td>
                                 <td>{{ item.points }}</td>
                             </tr>
                         </ng-container>
@@ -63,7 +65,9 @@
                                     <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
                                 </td>
                                 <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
-                                        [title]="item.country"> {{ isEmpty(item.name) ? item.steamId : item.name }}</td>
+                                        [title]="item.country"> <a
+                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
+                                        isEmpty(item.name) ? item.steamId : item.name }}</a></td>
                                 <td>{{ item.finishedMaps }}</td>
                             </tr>
                         </ng-container>
@@ -98,7 +102,9 @@
                                 <tr *ngFor="let item of mapLeaderboardPaginationUtil.getCurrentData(); index as i">
                                     <td><a href="javascript:void()" title="View Top 10"
                                             (click)="showMapLeaderboard(item.mapName)">{{ item.mapName }}</a></td>
-                                    <td>{{ isEmpty(item.name) ? item.steamId : item.name }}</td>
+                                    <td><a
+                                            [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
+                                            isEmpty(item.name) ? item.steamId : item.name }}</a></td>
                                     <td>{{ formatTime(item.time) }}</td>
                                 </tr>
                             </ng-container>
@@ -109,7 +115,8 @@
                             </ng-template>
                         </tbody>
                     </table>
-                    <app-pagination [pages]="mapLeaderboardPaginationUtil.getPages()" (pageChanged)="mapLeaderboardPaginationUtil.setPage($event)"></app-pagination>
+                    <app-pagination [pages]="mapLeaderboardPaginationUtil.getPages()"
+                        (pageChanged)="mapLeaderboardPaginationUtil.setPage($event)"></app-pagination>
                 </ng-container>
                 <ng-template #topTen>
                     <span class="text-white">Viewing Top10 for map <i>{{ topTenMap }}</i></span>
