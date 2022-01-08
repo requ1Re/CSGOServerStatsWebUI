@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => 'surf',
+    'default' => 'webuidata',
 
     'connections' => [
         'surf' => [
@@ -28,5 +28,18 @@ return [
             'prefix'    => '',
             'strict'    => false,
         ],
+        'webuidata' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_WEBUIDATA_HOST'),
+            'port'      => env('DB_WEBUIDATA_PORT'),
+            'database'  => env('DB_WEBUIDATA_DATABASE'),
+            'username'  => env('DB_WEBUIDATA_USERNAME'),
+            'password'  => env('DB_WEBUIDATA_PASSWORD'),
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
     ],
+    'migrations' => 'migrations'
 ];
