@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatsBaseComponent } from 'src/app/shared/components/stats-base/stats-base.component';
 import { KZStats } from 'src/app/shared/models/KZLeaderboard';
 import { APIService } from 'src/app/shared/services/api.service';
+import { UserDataService } from 'src/app/shared/services/userdata.service';
 import { PaginationUtil } from 'src/app/shared/utils/PaginationUtil';
 
 @Component({
@@ -15,8 +16,8 @@ export class KzStatsComponent extends StatsBaseComponent implements OnInit {
   mapProLeaderboardPaginationUtil = new PaginationUtil<KZStats.MapLeaderboardProData[]>([]);
   mapTPLeaderboardPaginationUtil = new PaginationUtil<KZStats.MapLeaderboardTPData[]>([]);
 
-  constructor(private api: APIService) {
-    super();
+  constructor(private api: APIService, userDataService: UserDataService) {
+    super(userDataService);
   }
 
   ngOnInit(): void {
@@ -26,9 +27,19 @@ export class KzStatsComponent extends StatsBaseComponent implements OnInit {
         if(leaderboard && leaderboard.success && leaderboard.data){
           this.mapTPLeaderboardPaginationUtil.setData(leaderboard.data.mapLeaderboard.tp);
           this.mapProLeaderboardPaginationUtil.setData(leaderboard.data.mapLeaderboard.pro);
+
+          this.loadUserNames(leaderboard);
         }
       })
     );
+  }
+
+  
+  async loadUserNames(leaderboard: KZStats.Leaderboard) {
+    await this.userDataService.requestUserData(leaderboard.data!.mapLeaderboard.tp.map(x => x.steamId));
+    await this.userDataService.requestUserData(leaderboard.data!.mapLeaderboard.pro.map(x => x.steamId));
+    await this.userDataService.requestUserData(leaderboard.data!.playerLeaderboard.points.map(x => x.steamId));
+    await this.userDataService.requestUserData(leaderboard.data!.playerLeaderboard.finishedMaps.map(x => x.steamId));
   }
 
   getPointsLeaderboardForDisplay(leaderboard: KZStats.Leaderboard|null): KZStats.PlayerLeaderboardPointsData[] {

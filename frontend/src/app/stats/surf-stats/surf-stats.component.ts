@@ -4,6 +4,7 @@ import { APIService } from 'src/app/shared/services/api.service';
 import { StatsBaseComponent } from 'src/app/shared/components/stats-base/stats-base.component';
 import { SurfStats } from 'src/app/shared/models/SurfLeaderboard';
 import { PaginationUtil } from 'src/app/shared/utils/PaginationUtil';
+import { UserDataService } from 'src/app/shared/services/userdata.service';
 
 @Component({
   selector: 'app-surf-stats',
@@ -23,8 +24,8 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
 
   faTrophy = faTrophy;
 
-  constructor(private api: APIService) {
-    super();
+  constructor(private api: APIService, userDataService: UserDataService) {
+    super(userDataService);
   }
 
   ngOnInit(): void {
@@ -34,9 +35,17 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
         if (leaderboard && leaderboard.success && leaderboard.data) {
           this.maps = leaderboard.data.mapLeaderboard.map((map) => map.mapName);
           this.mapLeaderboardPaginationUtil.setData(leaderboard.data.mapLeaderboard);
+
+          this.loadUserNames(leaderboard);
         }
       })
     );
+  }
+
+  async loadUserNames(leaderboard: SurfStats.Leaderboard) {
+    await this.userDataService.requestUserData(leaderboard.data!.mapLeaderboard.map(x => x.steamId));
+    await this.userDataService.requestUserData(leaderboard.data!.playerLeaderboard.points.map(x => x.steamId));
+    await this.userDataService.requestUserData(leaderboard.data!.playerLeaderboard.finishedMaps.map(x => x.steamId));
   }
 
   getPointsLeaderboardForDisplay(leaderboard: SurfStats.Leaderboard|null): SurfStats.PointsLeaderboardEntry[] {
@@ -63,6 +72,9 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
     this.register(
       this.api.getSurfMapLeaderboard(mapName).subscribe((leaderboard) => {
         this.surfMapLeaderboard = leaderboard;
+        if(leaderboard.data){
+          this.userDataService.requestUserData(leaderboard.data.map(x => x.steamId));
+        }
       })
     );
   }

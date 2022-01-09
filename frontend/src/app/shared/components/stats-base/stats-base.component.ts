@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { faTrophy, faMedal, faAward } from '@fortawesome/free-solid-svg-icons';
 import * as lookup from 'country-code-lookup';
+import { UserDataService } from '../../services/userdata.service';
 import { ConfigUtil } from '../../utils/ConfigUtil';
 import { SteamIDUtil } from '../../utils/SteamIDUtil';
 import { BaseComponent } from '../base/base.component';
@@ -9,7 +10,7 @@ import { BaseComponent } from '../base/base.component';
 @Component({template:''})
 export class StatsBaseComponent extends BaseComponent implements OnInit {
 
-  constructor() { super(); }
+  constructor(public userDataService: UserDataService) { super(); }
 
   ngOnInit(): void {
   }
@@ -76,5 +77,13 @@ export class StatsBaseComponent extends BaseComponent implements OnInit {
   
   convertSteamIdToCommunityId(steamId: string): string {
     return SteamIDUtil.convertSteamIdToCommunityId(steamId);
+  }
+
+  public requestUserData(steamIds: string[]) {
+    this.userDataService.requestUserData(steamIds);
+  }
+
+  public getUserNameFromCache(steamId: string, defaultValue: string = steamId) {
+    return this.userDataService.getUserNameFromCache(steamId, defaultValue);
   }
 }

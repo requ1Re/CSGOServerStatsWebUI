@@ -31,7 +31,7 @@
                                 <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
                                         [title]="item.country"> <a
                                         [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
-                                        isEmpty(item.name) ? item.steamId : item.name }}</a></td>
+                                        getUserNameFromCache(item.steamId, item.name) }}</a></td>
                                 <td>{{ item.points }}</td>
                             </tr>
                         </ng-container>
@@ -67,7 +67,7 @@
                                 <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
                                         [title]="item.country"> <a
                                         [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
-                                        isEmpty(item.name) ? item.steamId : item.name }}</a></td>
+                                        getUserNameFromCache(item.steamId, item.name) }}</a></td>
                                 <td>{{ item.finishedMaps }} ({{ item.finishedMapsPro }}/{{ item.finishedMapsTP }})</td>
                             </tr>
                         </ng-container>
@@ -101,7 +101,7 @@
                                 <td>{{ item.mapName }}</td>
                                 <td><a
                                         [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
-                                        isEmpty(item.name) ? item.steamId : item.name }}</a></td>
+                                        getUserNameFromCache(item.steamId, item.name) }}</a></td>
                                 <td>{{ item.time }}</td>
                             </tr>
                         </ng-container>
@@ -136,7 +136,7 @@
                                 <td>{{ item.mapName }}</td>
                                 <td><a
                                         [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
-                                        isEmpty(item.name) ? item.steamId : item.name }}</a></td>
+                                        getUserNameFromCache(item.steamId, item.name) }}</a></td>
                                 <td>{{ item.time }}</td>
                                 <td>{{ item.teleports }}</td>
                             </tr>
