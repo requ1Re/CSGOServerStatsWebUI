@@ -31,7 +31,7 @@
                                 <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
                                         [title]="item.country"> <a
                                         [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
-                                        isEmpty(item.name) ? item.steamId : item.name }}</a></td>
+                                        getUserNameFromCache(item.steamId, item.name) }}</a></td>
                                 <td>{{ item.points }}</td>
                             </tr>
                         </ng-container>
@@ -67,7 +67,7 @@
                                 <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
                                         [title]="item.country"> <a
                                         [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
-                                        isEmpty(item.name) ? item.steamId : item.name }}</a></td>
+                                        getUserNameFromCache(item.steamId, item.name) }}</a></td>
                                 <td>{{ item.finishedMaps }}</td>
                             </tr>
                         </ng-container>
@@ -104,7 +104,7 @@
                                             (click)="showMapLeaderboard(item.mapName)">{{ item.mapName }}</a></td>
                                     <td><a
                                             [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
-                                            isEmpty(item.name) ? item.steamId : item.name }}</a></td>
+                                            getUserNameFromCache(item.steamId, item.name) }}</a></td>
                                     <td>{{ formatTime(item.time) }}</td>
                                 </tr>
                             </ng-container>
@@ -136,7 +136,7 @@
                                     <td>
                                         <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
                                     </td>
-                                    <td>{{ isEmpty(item.name) ? item.steamId : item.name }}</td>
+                                    <td>{{ getUserNameFromCache(item.steamId, item.name) }}</td>
                                     <td>{{ formatTime(item.time) }}</td>
                                 </tr>
                             </ng-container>
