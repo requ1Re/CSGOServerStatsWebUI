@@ -1,5 +1,6 @@
 import { faChartBar } from '@fortawesome/free-regular-svg-icons';
 import { faClipboardList, faServer } from '@fortawesome/free-solid-svg-icons';
+import { environment } from 'src/environments/environment';
 import { FooterItem } from '../models/FooterItem';
 import { Gamemode } from '../models/Gamemode';
 import { Gameserver } from '../models/Gameserver';
@@ -53,7 +54,7 @@ export class ConfigUtil {
         external: false
       }
     ],
-    API_BASE_URL: 'http://localhost:8000/v1',
+    API_BASE_URL: environment.apiBaseUrl ?? '',
   };
 
   public static getFlagImagePath(countryCode: string): string {
