@@ -49,8 +49,13 @@ export class ConfigUtil {
         external: true
       },
       {
-        name: "Open Source Licenses",
+        name: "Licenses",
         url: ["/info/license"],
+        external: false
+      },
+      {
+        name: "v" + environment.version,
+        url: ["/info/changelog"],
         external: false
       }
     ],
