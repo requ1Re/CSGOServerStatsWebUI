@@ -14,10 +14,14 @@ export class UserDataService {
   public userDataCache: UserData[] = [];
 
   public async requestUserData(steamIds: string[]) {
-    const steamIdsToRequest = steamIds.filter(
+    let steamIdsToRequest = steamIds.filter(
       (steamId: string) =>
         !this.userDataCache.find((user: UserData) => user.steamId === steamId)
     );
+    steamIdsToRequest = steamIdsToRequest.filter(function (item, pos) {
+      return steamIdsToRequest.indexOf(item) == pos;
+    });
+
     if (steamIdsToRequest.length > 0) {
       console.log('[UserDataService] Requesting: ', steamIdsToRequest);
 
