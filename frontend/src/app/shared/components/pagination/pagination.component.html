@@ -2,9 +2,16 @@
     <button (click)="setPage(page-1)">
         <fa-icon [icon]="faAngleDoubleLeft"></fa-icon>
     </button>
-    <button *ngFor="let page of [].constructor(pages); let i = index" (click)="setPage(i+1)" [class.active]="isActive(i+1)">
-        {{ i+1 }}
-    </button>
+    <ng-container *ngFor="let p of pagination(page, pages)">
+        <button *ngIf="isNumber(p); else dots" (click)="setPage(parseNumber(p))" [class.active]="isActive(parseNumber(p))">
+            {{ p }}
+        </button>
+        <ng-template #dots>
+            <button>
+                ...
+            </button>
+        </ng-template>
+    </ng-container>
     <button (click)="setPage(page+1)">
         <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
     </button>
