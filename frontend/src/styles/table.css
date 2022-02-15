@@ -1,5 +1,5 @@
 table {
-    @apply bg-gray-800 shadow-lg text-gray-300 table-auto text-left w-full rounded;
+    @apply bg-gray-800 shadow-lg text-zinc-200 table-auto text-left w-full rounded;
 }
 table > thead > tr {
     @apply border-b-2 border-gray-700;

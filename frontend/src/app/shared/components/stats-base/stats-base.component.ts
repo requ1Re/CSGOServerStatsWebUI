@@ -36,7 +36,7 @@ export class StatsBaseComponent extends BaseComponent implements OnInit {
       case 3:
         return '#bf8970';
       default:
-        return 'white';
+        return 'inherit';
     }
   }
 
