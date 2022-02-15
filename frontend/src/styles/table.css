@@ -5,7 +5,7 @@ table > thead > tr {
     @apply border-b-2 border-zinc-800;
 }
 table > thead > tr > th {
-    @apply px-5 py-2 font-bold;
+    @apply px-5 py-2 text-xs font-bold;
 }
 table > tbody > tr > td {
     @apply px-5 py-3;

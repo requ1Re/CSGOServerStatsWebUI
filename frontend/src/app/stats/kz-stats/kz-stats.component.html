@@ -30,7 +30,7 @@
                                 </td>
                                 <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
                                         [title]="item.country"> <a
-                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
+                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)" target="_blank">{{
                                         getUserNameFromCache(item.steamId, item.name) }}</a></td>
                                 <td>{{ item.points }}</td>
                             </tr>
@@ -66,7 +66,7 @@
                                 </td>
                                 <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
                                         [title]="item.country"> <a
-                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
+                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)" target="_blank">{{
                                         getUserNameFromCache(item.steamId, item.name) }}</a></td>
                                 <td>{{ item.finishedMaps }} ({{ item.finishedMapsPro }}/{{ item.finishedMapsTP }})</td>
                             </tr>
@@ -92,7 +92,7 @@
                         <tr>
                             <th>MAP NAME</th>
                             <th>RECORD BY</th>
-                            <th>TIME</th>
+                            <th>TIME (MM:SS.SSS)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,9 +100,9 @@
                             <tr *ngFor="let item of mapProLeaderboardPaginationUtil.getCurrentData(); index as i">
                                 <td>{{ item.mapName }}</td>
                                 <td><a
-                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
+                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)" target="_blank">{{
                                         getUserNameFromCache(item.steamId, item.name) }}</a></td>
-                                <td>{{ item.time }}</td>
+                                <td>{{ formatTime(item.time) }}</td>
                             </tr>
                         </ng-container>
                         <ng-template #loading>
@@ -126,7 +126,7 @@
                         <tr>
                             <th>MAP NAME</th>
                             <th>RECORD BY</th>
-                            <th>TIME</th>
+                            <th>TIME (MM:SS.SSS)</th>
                             <th>TELEPORTS</th>
                         </tr>
                     </thead>
@@ -135,9 +135,9 @@
                             <tr *ngFor="let item of mapTPLeaderboardPaginationUtil.getCurrentData(); index as i">
                                 <td>{{ item.mapName }}</td>
                                 <td><a
-                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)">{{
+                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)" target="_blank">{{
                                         getUserNameFromCache(item.steamId, item.name) }}</a></td>
-                                <td>{{ item.time }}</td>
+                                <td>{{ formatTime(item.time) }}</td>
                                 <td>{{ item.teleports }}</td>
                             </tr>
                         </ng-container>
