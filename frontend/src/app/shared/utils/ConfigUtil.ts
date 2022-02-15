@@ -50,8 +50,8 @@ export class ConfigUtil {
       },
       {
         name: "Licenses",
-        url: ["/info/license"],
-        external: false
+        url: ["/3rdpartylicenses.txt"],
+        external: true
       },
       {
         name: "v" + environment.version,
