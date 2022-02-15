@@ -7,7 +7,7 @@ import { KZStats } from '../models/KZLeaderboard';
 import { SurfStats } from '../models/SurfLeaderboard';
 import { UserData } from '../models/UserData';
 import { ConfigUtil } from '../utils/ConfigUtil';
-import { ErrorService } from './ErrorService';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root',

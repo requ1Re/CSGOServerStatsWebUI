@@ -1,11 +1,11 @@
-<div class="flex flex-row justify-center">
+<div class="flex flex-row justify-center mt-10 mb-10">
     <div class="text-5xl text-center font-extrabold">
         <span class="gradient-text-1337ffm">
             1337Frankfurt CS:GO Servers
         </span>
     </div>
 </div>
-<div class="mt-7 flex flex-col space-y-5 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-5 md:gap-y-5">
+<div class="flex flex-col space-y-5 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-5 md:gap-y-5">
     <app-server-display *ngFor="let item of servers" [server]="item"></app-server-display>
 </div>
 <div class="mt-5 flex flex-row justify-center">

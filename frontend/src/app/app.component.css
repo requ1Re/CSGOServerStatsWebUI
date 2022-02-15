@@ -10,7 +10,7 @@
     width: 100%;
 }
 .error {
-    @apply bg-red-600 p-3 rounded shadow text-white;
+    @apply bg-red-600 p-3 rounded shadow text-white mt-10;
     margin-bottom: 25px;
 }
 .error li {
@@ -19,7 +19,7 @@
     list-style-position: inside;
 }
 .loading {
-  @apply bg-gray-900;
+  @apply bg-gray-900 opacity-80;
 
   position: fixed;
   top: 0;

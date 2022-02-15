@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from './shared/components/base/base.component';
 import { AppError } from './shared/models/AppError';
-import { ErrorService } from './shared/services/ErrorService';
+import { ErrorService } from './shared/services/error.service';
 import { LoadingService } from './shared/services/loading.service';
 
 @Component({
