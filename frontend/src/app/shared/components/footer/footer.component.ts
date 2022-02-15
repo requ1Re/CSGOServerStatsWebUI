@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faFacebook, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faInstagram, faSteam, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { ConfigUtil } from '../../utils/ConfigUtil';
 
 @Component({
@@ -12,6 +12,7 @@ export class FooterComponent implements OnInit {
   faTwitter = faTwitter;
   faFacebook = faFacebook;
   faInstagram = faInstagram;
+  faSteam = faSteam;
 
   footerItems = ConfigUtil.GLOBALS.FOOTER_ITEMS;
 

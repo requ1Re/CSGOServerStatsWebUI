@@ -1,9 +1,15 @@
 button {
-    @apply p-3 bg-zinc-900 text-white shadow-lg border-none;
+  @apply p-3 bg-gray-800 text-white shadow-lg border-none rounded-none;
+}
+button:first-of-type {
+  @apply rounded-tl rounded-bl;
+}
+button:last-of-type {
+  @apply rounded-tr rounded-br;
 }
 button.active {
-    @apply bg-zinc-800;
+  @apply bg-gray-700;
 }
 button:hover {
-    @apply bg-zinc-800;
+  @apply bg-gray-700;
 }

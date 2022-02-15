@@ -5,8 +5,6 @@
     width: 100%;
 }
 .content {
-    @apply bg-neutral-900 shadow-lg;
-
     flex-grow: 1;
     padding: 25px;
     width: 100%;
