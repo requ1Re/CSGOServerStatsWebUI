@@ -44,18 +44,18 @@ export class ConfigUtil {
         external: true,
       },
       {
+        name: "Imprint",
+        url: ["https://1337frankfurt.de/impressum/"],
+        external: true,
+      },
+      {
         name: "Bans",
         url: ["https://bans.require.lol"],
         external: true
       },
       {
         name: "Licenses",
-        url: ["/3rdpartylicenses.txt"],
-        external: true
-      },
-      {
-        name: "v" + environment.version,
-        url: ["/info/changelog"],
+        url: ["/info/license"],
         external: false
       }
     ],
