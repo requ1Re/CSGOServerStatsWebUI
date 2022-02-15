@@ -1,6 +1,6 @@
 <div class="w-full xl:max-w-screen-2xl mx-auto px-6 text-white">
-    <div class="relative flex items-center justify-between h-16">
-        <div class="flex-1 flex items-stretch justify-start">
+    <div class="relative flex flex-col sm:flex-row items-center justify-center sm:justify-between h-16">
+        <div class="flex items-stretch justify-start">
             <ng-container *ngFor="let item of footerItems; index as i">
                 <ng-container *ngIf="item.external; else externalLink">
                     <a [href]="item.url[0]" target="_blank">{{ item.name }}</a>
@@ -14,7 +14,7 @@
             </ng-container>
         </div>
 
-        <div class="absolute inset-y-0 right-0 flex items-center space-x-3 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <div class="flex items-center space-x-3">
             <a href="https://steamcommunity.com/groups/1337_Frankfurt" class="action-icon" target="_blank">
                 <fa-icon [icon]="faSteam"></fa-icon>
             </a>
