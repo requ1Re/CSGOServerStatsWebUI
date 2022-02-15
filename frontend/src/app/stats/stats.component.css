@@ -1,6 +1,23 @@
 .active-link {
-    text-decoration: underline;
-    text-decoration-color: var(--color-1337fm-logo-color);
-    text-underline-offset: 1px;
-    text-decoration-thickness: 2px;
+  text-decoration: none;
+  @apply bg-gray-700;
+}
+.sidebar {
+  @apply w-full xl:w-2/12 mr-5;
+}
+.stats-pages {
+  @apply w-full h-fit bg-gray-800 rounded;
+}
+.stats-pages > a {
+  @apply px-3 py-2;
+}
+.stats-pages > a:first-of-type {
+  @apply rounded-tl rounded-tr;
+}
+.stats-pages > a:last-of-type {
+  @apply rounded-bl rounded-br;
+}
+.stats-pages > a:hover {
+  text-decoration: none;
+  @apply bg-gray-700;
 }
