@@ -22,14 +22,14 @@
                 <div class="hidden sm:block sm:ml-6">
                     <div class="flex space-x-4">
                         <a *ngFor="let link of links" [routerLink]="link.url"
-                            class="text-zinc-300 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                            class="text-zinc-200 hover:bg-gray-900 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                             routerLinkActive="bg-gray-900 text-white" href="#" aria-current="page">
                             <fa-icon [icon]="link.faIcon"></fa-icon> {{ link.name }}
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 hidden">
                 <button href="#" disabled class="default-btn cursor-pointer" aria-current="page">
                     <img src="/assets/img/steam_sign_in.png">
                 </button>
@@ -41,7 +41,7 @@
     <div class="sm:hidden" id="mobile-menu" *ngIf="open">
         <div class="px-2 pt-2 pb-3 space-y-1">
             <a *ngFor="let link of links" [routerLink]="link.url"
-                class="text-zinc-300 hover:bg-gray-900 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                class="text-zinc-200 hover:bg-gray-900 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 routerLinkActive="bg-gray-900 text-white" href="#" aria-current="page">
                 {{ link.name }}
             </a>
