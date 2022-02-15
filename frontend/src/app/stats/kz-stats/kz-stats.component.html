@@ -1,156 +1,156 @@
 <div class="flex flex-col space-y-5 mt-7">
-    <div>
-        <div class="text-4xl font-extrabold mb-2">
-            <span class="text-zinc-300">
-                KZ
-            </span>
-        </div>
-
-        <div class="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
-            <div class="flex-1">
-                <div class="text-lg mb-2">
-                    <span class="text-zinc-300">
-                        Most Points
-                    </span>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>USER</th>
-                            <th>POINTS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
-                            <tr *ngFor="let item of getPointsLeaderboardForDisplay(leaderboard); index as i"
-                                [style.color]="getPlaceColor(i+1)">
-                                <td>
-                                    <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
-                                </td>
-                                <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
-                                        [title]="item.country"> <a
-                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)" target="_blank">{{
-                                        getUserNameFromCache(item.steamId, item.name) }}</a></td>
-                                <td>{{ item.points }}</td>
-                            </tr>
-                        </ng-container>
-                        <ng-template #loading>
-                            <tr>
-                                <td colspan="3" class="text-center">Loading...</td>
-                            </tr>
-                        </ng-template>
-                    </tbody>
-                </table>
-            </div>
-            <div class="flex-1">
-                <div class="text-lg mb-2">
-                    <span class="text-zinc-300">
-                        Most Finished Maps
-                    </span>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>USER</th>
-                            <th>FINISHED MAPS (PRO/TP)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
-                            <tr *ngFor="let item of getFinishedMapsLeaderboardForDisplay(leaderboard); index as i"
-                                [style.color]="getPlaceColor(i+1)">
-                                <td>
-                                    <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
-                                </td>
-                                <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2"
-                                        [title]="item.country"> <a
-                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)" target="_blank">{{
-                                        getUserNameFromCache(item.steamId, item.name) }}</a></td>
-                                <td>{{ item.finishedMaps }} ({{ item.finishedMapsPro }}/{{ item.finishedMapsTP }})</td>
-                            </tr>
-                        </ng-container>
-                        <ng-template #loading>
-                            <tr>
-                                <td colspan="3" class="text-center">Loading...</td>
-                            </tr>
-                        </ng-template>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="mt-10 flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
-            <div class="flex-1">
-                <div class="text-lg mb-2">
-                    <span class="text-zinc-300">
-                        Server Records (PRO/NO TP)
-                    </span>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>MAP NAME</th>
-                            <th>RECORD BY</th>
-                            <th>TIME (MM:SS.SSS)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
-                            <tr *ngFor="let item of mapProLeaderboardPaginationUtil.getCurrentData(); index as i">
-                                <td>{{ item.mapName }}</td>
-                                <td><a
-                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)" target="_blank">{{
-                                        getUserNameFromCache(item.steamId, item.name) }}</a></td>
-                                <td>{{ formatTime(item.time) }}</td>
-                            </tr>
-                        </ng-container>
-                        <ng-template #loading>
-                            <tr>
-                                <td colspan="3" class="text-center">Loading...</td>
-                            </tr>
-                        </ng-template>
-                    </tbody>
-                </table>
-                <app-pagination [pages]="mapProLeaderboardPaginationUtil.getPages()"
-                    (pageChanged)="mapProLeaderboardPaginationUtil.setPage($event)"></app-pagination>
-            </div>
-            <div class="flex-1">
-                <div class="text-lg mb-2">
-                    <span class="text-zinc-300">
-                        Server Records (TP)
-                    </span>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>MAP NAME</th>
-                            <th>RECORD BY</th>
-                            <th>TIME (MM:SS.SSS)</th>
-                            <th>TELEPORTS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
-                            <tr *ngFor="let item of mapTPLeaderboardPaginationUtil.getCurrentData(); index as i">
-                                <td>{{ item.mapName }}</td>
-                                <td><a
-                                        [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)" target="_blank">{{
-                                        getUserNameFromCache(item.steamId, item.name) }}</a></td>
-                                <td>{{ formatTime(item.time) }}</td>
-                                <td>{{ item.teleports }}</td>
-                            </tr>
-                        </ng-container>
-                        <ng-template #loading>
-                            <tr>
-                                <td colspan="3" class="text-center">Loading...</td>
-                            </tr>
-                        </ng-template>
-                    </tbody>
-                </table>
-                <app-pagination [pages]="mapTPLeaderboardPaginationUtil.getPages()"
-                    (pageChanged)="mapTPLeaderboardPaginationUtil.setPage($event)"></app-pagination>
-            </div>
-        </div>
+  <div>
+    <div class="text-4xl font-extrabold mb-2">
+      <span class="text-zinc-300">
+        KZ
+      </span>
     </div>
+
+    <div class="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
+      <div class="flex-1">
+        <div class="text-lg mb-2">
+          <span class="text-zinc-300">
+            Most Points
+          </span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>USER</th>
+              <th>POINTS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
+              <tr *ngFor="let item of getPointsLeaderboardForDisplay(leaderboard); index as i"
+                [style.color]="getPlaceColor(i+1)">
+                <td>
+                  <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                </td>
+                <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2" [title]="item.country"> <a
+                    [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)"
+                    target="_blank">{{
+                    getUserNameFromCache(item.steamId, item.name) }}</a></td>
+                <td>{{ item.points }}</td>
+              </tr>
+            </ng-container>
+            <ng-template #loading>
+              <tr>
+                <td colspan="3" class="text-center">Loading...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex-1">
+        <div class="text-lg mb-2">
+          <span class="text-zinc-300">
+            Most Finished Maps
+          </span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>USER</th>
+              <th>FINISHED MAPS (PRO/TP)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
+              <tr *ngFor="let item of getFinishedMapsLeaderboardForDisplay(leaderboard); index as i"
+                [style.color]="getPlaceColor(i+1)">
+                <td>
+                  <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                </td>
+                <td><img [src]="getCountryFlagByName(item.country)" class="float-left mr-2" [title]="item.country"> <a
+                    [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)"
+                    target="_blank">{{
+                    getUserNameFromCache(item.steamId, item.name) }}</a></td>
+                <td>{{ item.finishedMaps }} ({{ item.finishedMapsPro }}/{{ item.finishedMapsTP }})</td>
+              </tr>
+            </ng-container>
+            <ng-template #loading>
+              <tr>
+                <td colspan="3" class="text-center">Loading...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="mt-10 flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
+      <div class="flex-1">
+        <div class="text-lg mb-2">
+          <span class="text-zinc-300">
+            Server Records (PRO/NO TP)
+          </span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>MAP NAME</th>
+              <th>RECORD BY</th>
+              <th>TIME (MM:SS.SSS)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
+              <tr *ngFor="let item of mapProLeaderboardPaginationUtil.getCurrentData(); index as i">
+                <td>{{ item.mapName }}</td>
+                <td><a [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)"
+                    target="_blank">{{
+                    getUserNameFromCache(item.steamId, item.name) }}</a></td>
+                <td>{{ formatTime(item.time) }}</td>
+              </tr>
+            </ng-container>
+            <ng-template #loading>
+              <tr>
+                <td colspan="3" class="text-center">Loading...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+        <app-pagination [pages]="mapProLeaderboardPaginationUtil.getPages()"
+          (pageChanged)="mapProLeaderboardPaginationUtil.setPage($event)"></app-pagination>
+      </div>
+      <div class="flex-1">
+        <div class="text-lg mb-2">
+          <span class="text-zinc-300">
+            Server Records (TP)
+          </span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>MAP NAME</th>
+              <th>RECORD BY</th>
+              <th>TIME (MM:SS.SSS)</th>
+              <th>TELEPORTS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="kzLeaderboard as leaderboard; else loading">
+              <tr *ngFor="let item of mapTPLeaderboardPaginationUtil.getCurrentData(); index as i">
+                <td>{{ item.mapName }}</td>
+                <td><a [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)"
+                    target="_blank">{{
+                    getUserNameFromCache(item.steamId, item.name) }}</a></td>
+                <td>{{ formatTime(item.time) }}</td>
+                <td>{{ item.teleports }}</td>
+              </tr>
+            </ng-container>
+            <ng-template #loading>
+              <tr>
+                <td colspan="3" class="text-center">Loading...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+        <app-pagination [pages]="mapTPLeaderboardPaginationUtil.getPages()"
+          (pageChanged)="mapTPLeaderboardPaginationUtil.setPage($event)"></app-pagination>
+      </div>
+    </div>
+  </div>
 </div>

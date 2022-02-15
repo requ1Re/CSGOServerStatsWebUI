@@ -9,10 +9,11 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { BaseComponent } from './components/base/base.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent, SafeUrlPipe, BaseComponent, PaginationComponent],
+  declarations: [NavbarComponent, FooterComponent, SafeUrlPipe, BaseComponent, PaginationComponent, LoadingSpinnerComponent],
   imports: [CommonModule, RouterModule, FontAwesomeModule, HttpClientModule],
-  exports: [NavbarComponent, FooterComponent, FontAwesomeModule, SafeUrlPipe, BaseComponent, PaginationComponent],
+  exports: [NavbarComponent, FooterComponent, FontAwesomeModule, SafeUrlPipe, BaseComponent, PaginationComponent, LoadingSpinnerComponent],
 })
 export class SharedModule {}

@@ -5,6 +5,7 @@ import { StatsBaseComponent } from 'src/app/shared/components/stats-base/stats-b
 import { SurfStats } from 'src/app/shared/models/SurfLeaderboard';
 import { PaginationUtil } from 'src/app/shared/utils/PaginationUtil';
 import { UserDataService } from 'src/app/shared/services/userdata.service';
+import { LoadingService } from 'src/app/shared/services/loading.service';
 
 @Component({
   selector: 'app-surf-stats',
@@ -16,7 +17,7 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
   surfMapLeaderboard: SurfStats.MapLeaderboard;
 
   mapLeaderboardPaginationUtil = new PaginationUtil<SurfStats.MapLeaderboardData[]>([]);
-  
+
   maps: string[];
 
   viewTopTen = false;
@@ -24,11 +25,12 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
 
   faTrophy = faTrophy;
 
-  constructor(private api: APIService, userDataService: UserDataService) {
-    super(userDataService);
+  constructor(private api: APIService, userDataService: UserDataService, loadingService: LoadingService) {
+    super(userDataService, loadingService);
   }
 
   ngOnInit(): void {
+    this.showLoadingSpinner(true);
     this.register(
       this.api.getSurfLeaderboard().subscribe((leaderboard) => {
         this.surfLeaderboard = leaderboard;
@@ -37,6 +39,7 @@ export class SurfStatsComponent extends StatsBaseComponent implements OnInit {
           this.mapLeaderboardPaginationUtil.setData(leaderboard.data.mapLeaderboard);
 
           this.loadUserNames(leaderboard);
+          this.showLoadingSpinner(false);
         }
       })
     );

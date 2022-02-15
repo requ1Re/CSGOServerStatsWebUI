@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { faTrophy, faMedal, faAward } from '@fortawesome/free-solid-svg-icons';
 import * as lookup from 'country-code-lookup';
+import { LoadingService } from '../../services/loading.service';
 import { UserDataService } from '../../services/userdata.service';
 import { ConfigUtil } from '../../utils/ConfigUtil';
 import { SteamIDUtil } from '../../utils/SteamIDUtil';
@@ -10,7 +11,7 @@ import { BaseComponent } from '../base/base.component';
 @Component({template:''})
 export class StatsBaseComponent extends BaseComponent implements OnInit {
 
-  constructor(public userDataService: UserDataService) { super(); }
+  constructor(public userDataService: UserDataService, private loadingService: LoadingService) { super(); }
 
   ngOnInit(): void {
   }
@@ -74,7 +75,7 @@ export class StatsBaseComponent extends BaseComponent implements OnInit {
     return !str || !str.trim();
   }
 
-  
+
   convertSteamIdToCommunityId(steamId: string): string {
     return SteamIDUtil.convertSteamIdToCommunityId(steamId);
   }
@@ -85,5 +86,13 @@ export class StatsBaseComponent extends BaseComponent implements OnInit {
 
   public getUserNameFromCache(steamId: string, defaultValue: string = steamId) {
     return this.userDataService.getUserNameFromCache(steamId, defaultValue);
+  }
+
+  showLoadingSpinner(val: boolean){
+    if(val){
+      this.loadingService.showLoading();
+    }else{
+      this.loadingService.hideLoading();
+    }
   }
 }
