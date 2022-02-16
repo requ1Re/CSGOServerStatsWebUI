@@ -28,6 +28,18 @@ return [
             'prefix'    => '',
             'strict'    => false,
         ],
+        'retakes' => [
+            'driver'    => 'mysql',
+            'host'      => env('DB_RETAKES_HOST'),
+            'port'      => env('DB_RETAKES_PORT'),
+            'database'  => env('DB_RETAKES_DATABASE'),
+            'username'  => env('DB_RETAKES_USERNAME'),
+            'password'  => env('DB_RETAKES_PASSWORD'),
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
         'webuidata' => [
             'driver'    => 'mysql',
             'host'      => env('DB_WEBUIDATA_HOST'),

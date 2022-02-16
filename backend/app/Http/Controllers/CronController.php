@@ -24,6 +24,13 @@ class CronController extends Controller
             ->whereNotIn('steamid', $dbUsers)
             ->get();
 
+        $retakeUsers = app('db')->connection('retakes')
+            ->table('rankme')
+            ->select('steam', 'name')
+            ->where('steam', '!=', '')
+            ->whereNotIn('steam', $dbUsers)
+            ->get();
+
         foreach ($surfUsers as $surfUser) {
             if (
                 app('db')->connection('webuidata')->table('usernames')->where('steam_id', $surfUser->steamid)->doesntExist()
@@ -56,8 +63,24 @@ class CronController extends Controller
             }
         }
 
+        foreach ($retakeUsers as $retakeUser) {
+            if (
+                app('db')->connection('webuidata')->table('usernames')->where('steam_id', $retakeUser->steam)->doesntExist()
+                && isset($retakeUser->steam)
+                && isset($retakeUser->name)
+            ) {
+                app('db')->connection('webuidata')->table('usernames')->insert([
+                    'steam_id' => $retakeUser->steam,
+                    'community_id' => SteamIDHelper::convertSteamID2ToCommunityID($retakeUser->steam),
+                    'username' => $retakeUser->name,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+            }
+        }
+
         return response()->json(['success' => true, 'inserted' => [
-            'surf' => count($surfUsers), 'kz' => count($kzUsers)
+            'surf' => count($surfUsers), 'kz' => count($kzUsers), 'retakes' => count($retakeUsers)
         ]]);
     }
 
@@ -87,18 +110,16 @@ class CronController extends Controller
             foreach ($response->response->players as $player) {
                 foreach ($dbUserChunk as $dbUser) {
                     if ($dbUser->community_id == $player->steamid) {
-                        if($dbUser->username <> $player->personaname){
+                        if ($dbUser->username <> $player->personaname) {
                             app('db')->connection('webuidata')->table('usernames')->where('community_id', $player->steamid)->update([
-                                'username' => $player->personaname
+                                'username' => $player->personaname,
+                                'updated_at' => date('Y-m-d H:i:s')
                             ]);
                             $dbRequests += 1;
                         }
                     }
                 }
             }
-
-
-
         }
 
         return response()->json(['success' => true, 'requests' => ['steam' => $steamRequests, 'db' => $dbRequests]]);

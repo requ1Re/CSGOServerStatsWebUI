@@ -135,4 +135,34 @@ class StatsController extends Controller
 
         return response()->json($wrapper);
     }
+
+    public function showRetake() {
+        $obj = new \StdClass();
+
+        $obj->score = app('db')->connection('retakes')->table('rankme')
+            ->select('steam AS steamId', 'name', 'score')
+            ->orderBy('score', 'desc')->limit(10)->get();
+
+        $obj->kills = app('db')->connection('retakes')->table('rankme')
+            ->select('steam AS steamId', 'name', 'kills')
+            ->orderBy('kills', 'desc')->limit(10)->get();
+
+        $obj->mvp = app('db')->connection('retakes')->table('rankme')
+            ->select('steam AS steamId', 'name', 'mvp')
+            ->orderBy('mvp', 'desc')->limit(10)->get();
+
+        $obj->noscopeDistance = app('db')->connection('retakes')->table('rankme')
+            ->select('steam AS steamId', 'name', 'no_scope_dis AS distance')
+            ->orderBy('no_scope_dis', 'desc')->limit(10)->get();
+
+        $wrapper = new Wrapper();
+        if ($obj->score && $obj->noscopeDistance && $obj->kills && $obj->mvp) {
+            $wrapper->success = true;
+            $wrapper->data = $obj;
+        } else {
+            $wrapper->success = false;
+            $wrapper->data = null;
+        }
+        return response()->json($wrapper);
+    }
 }
