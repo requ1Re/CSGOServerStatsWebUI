@@ -1,5 +1,5 @@
-import { APIWrapper } from "./APIWrapper";
-import { Gamemode } from "./Gamemode";
+import { APIWrapper } from './APIWrapper';
+import { Gamemode } from './Gamemode';
 
 export namespace ServerAPI {
   export interface ServerList extends APIWrapper<GameServer[]> {}
@@ -13,8 +13,14 @@ export namespace ServerAPI {
 
   export interface QueryInfo {
     hostname: string;
-    map: string;
+    map: Map;
     players: number;
     maxPlayers: number;
+  }
+
+  export interface Map {
+    name: string;
+    workshop: boolean;
+    preview?: string;
   }
 }
