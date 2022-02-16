@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { faCopy, faPlayCircle } from '@fortawesome/free-regular-svg-icons';
-import { Gameserver } from 'src/app/shared/models/Gameserver';
+import { ServerAPI } from 'src/app/shared/models/Server';
 import { GamemodeUtil } from 'src/app/shared/utils/GamemodeUtil';
 
 @Component({
@@ -13,7 +13,7 @@ export class ServerDisplayComponent implements OnInit {
   faPlayCircle = faPlayCircle;
 
   @Input()
-  server: Gameserver;
+  server: ServerAPI.GameServer;
 
   constructor() {}
 
@@ -30,7 +30,7 @@ export class ServerDisplayComponent implements OnInit {
       });
   }
 
-  getServerImage(server: Gameserver): string {
+  getServerImage(server: ServerAPI.GameServer): string {
     return GamemodeUtil.getGamemodeImagePath(server.gamemode);
   }
 }

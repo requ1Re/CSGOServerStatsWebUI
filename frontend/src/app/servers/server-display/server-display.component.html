@@ -2,6 +2,7 @@
     [style.backgroundImage]="'url(\'' + getServerImage(server) + '\')'">
     <p class="server-name">{{ server.name }}</p>
     <p>{{ server.ip }}</p>
+    <p class="text-lg">{{ server.queryInfo.players }}/{{ server.queryInfo.maxPlayers }}</p>
     <div class="flex flex-row justify-center space-x-5">
         <a href="javascript:void()" (click)="copyToClipboard(server.ip)" class="action-icon" title="Copy IP to clipboard">
             <fa-icon [icon]="faCopy"></fa-icon>
