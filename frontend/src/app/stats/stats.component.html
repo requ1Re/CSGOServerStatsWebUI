@@ -1,11 +1,11 @@
 <div class="flex flex-row justify-center mt-10 mb-10">
   <div class="text-5xl text-center font-extrabold">
     <span class="text-zinc-200">
-      Leaderboard
+      Leaderboards
     </span>
   </div>
 </div>
-<div class="block sm:flex">
+<div class="block lg:grid grid-cols-5 gap-4 mb-10">
   <div class="sidebar mb-5">
     <span class="text-lg text-zinc-200">
       Gamemode
@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="content flex-1">
+  <div class="content col-span-4">
     <router-outlet></router-outlet>
   </div>
 </div>

@@ -32,7 +32,7 @@ export class ConfigUtil {
         faIcon: faServer,
       },
       {
-        name: 'Leaderboard',
+        name: 'Leaderboards',
         url: ['/leaderboard'],
         faIcon: faClipboardList,
       },

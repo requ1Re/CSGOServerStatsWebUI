@@ -3,7 +3,7 @@
   @apply bg-gray-700;
 }
 .sidebar {
-  @apply w-full xl:w-2/12 mr-5;
+  @apply w-full mr-5;
 }
 .stats-pages {
   @apply w-full h-fit bg-gray-800 rounded;
