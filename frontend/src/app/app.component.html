@@ -1,6 +1,4 @@
-<div class="loading" *ngIf="showLoading">
-  <app-loading-spinner></app-loading-spinner>
-</div>
+<app-loading-overlay *ngIf="showLoading"></app-loading-overlay>
 <div class="page">
     <app-navbar></app-navbar>
     <div class="content w-full xl:max-w-screen-2xl mx-auto px-2 sm:px-6 sm:mt-10 z-10">
