@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { APIWrapper } from '../models/APIWrapper';
 import { KZStats } from '../models/KZLeaderboard';
+import { RetakesStats } from '../models/RetakesLeaderboard';
 import { SurfStats } from '../models/SurfLeaderboard';
 import { UserData } from '../models/UserData';
 import { ConfigUtil } from '../utils/ConfigUtil';
@@ -44,6 +45,17 @@ export class APIService {
   public getKZLeaderboard(): Observable<KZStats.Leaderboard> {
     return this.http
       .get<KZStats.Leaderboard>(`${this.apiBaseUrl}/server/kz/leaderboard`)
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          this.errorService.addError({ message: err.message });
+          return throwError(err);
+        })
+      );
+  }
+
+  public getRetakesLeaderboard(): Observable<RetakesStats.Leaderboard> {
+    return this.http
+      .get<RetakesStats.Leaderboard>(`${this.apiBaseUrl}/server/retakes/stats`)
       .pipe(
         catchError((err: HttpErrorResponse) => {
           this.errorService.addError({ message: err.message });

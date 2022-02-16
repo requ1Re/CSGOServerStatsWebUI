@@ -1,13 +1,154 @@
 <div class="flex flex-col space-y-5">
-    <div>
-        <div class="text-3xl font-extrabold mb-2">
-            <span class="text-zinc-200">
-                Retakes
-            </span>
-        </div>
-
-        <div class="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
-            <h1 class="text-white">Coming Soon</h1>
-        </div>
+  <div>
+    <div class="text-4xl font-extrabold mb-2">
+      <span class="text-zinc-200">
+        Retakes
+      </span>
     </div>
+
+    <div class="flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
+      <div class="flex-1">
+        <div class="text-lg mb-2">
+          <span class="text-zinc-200">
+            Highest Score
+          </span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>USER</th>
+              <th>SCORE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="retakesLeaderboard as leaderboard; else loading">
+              <tr *ngFor="let item of getScoreLeaderboardForDisplay(leaderboard); index as i"
+                [style.color]="getPlaceColor(i+1)">
+                <td>
+                  <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                </td>
+                <td><a [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)"
+                    target="_blank">{{
+                    getUserNameFromCache(item.steamId, item.name) }}</a></td>
+                <td>{{ item.score }}</td>
+              </tr>
+            </ng-container>
+            <ng-template #loading>
+              <tr>
+                <td colspan="3" class="text-center">Loading...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex-1">
+        <div class="text-lg mb-2">
+          <span class="text-zinc-200">
+            Most Kills
+          </span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>USER</th>
+              <th>KILLS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="retakesLeaderboard as leaderboard; else loading">
+              <tr *ngFor="let item of getKillsLeaderboardForDisplay(leaderboard); index as i"
+                [style.color]="getPlaceColor(i+1)">
+                <td>
+                  <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                </td>
+                <td><a [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)"
+                    target="_blank">{{
+                    getUserNameFromCache(item.steamId, item.name) }}</a></td>
+                <td>{{ item.kills }}</td>
+              </tr>
+            </ng-container>
+            <ng-template #loading>
+              <tr>
+                <td colspan="3" class="text-center">Loading...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="mt-10 flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-5">
+      <div class="flex-1">
+        <div class="text-lg mb-2">
+          <span class="text-zinc-200">
+            Most MVPs
+          </span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>USER</th>
+              <th>MVPS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="retakesLeaderboard as leaderboard; else loading">
+              <tr *ngFor="let item of getMvpLeaderboardForDisplay(leaderboard); index as i"
+                [style.color]="getPlaceColor(i+1)">
+                <td>
+                  <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                </td>
+                <td><a [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)"
+                    target="_blank">{{
+                    getUserNameFromCache(item.steamId, item.name) }}</a></td>
+                <td>{{ item.mvp }}</td>
+              </tr>
+            </ng-container>
+            <ng-template #loading>
+              <tr>
+                <td colspan="3" class="text-center">Loading...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex-1">
+        <div class="text-lg mb-2">
+          <span class="text-zinc-200">
+            Highest No-Scope Distance
+          </span>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>USER</th>
+              <th>DISTANCE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="retakesLeaderboard as leaderboard; else loading">
+              <tr *ngFor="let item of getNoScopeDistanceLeaderboardForDisplay(leaderboard); index as i"
+                [style.color]="getPlaceColor(i+1)">
+                <td>
+                  <fa-icon [icon]="getPlaceIcon(i+1)"></fa-icon> {{ i+1 }}
+                </td>
+                <td><a [href]="'https://steamcommunity.com/profiles/' + convertSteamIdToCommunityId(item.steamId)"
+                    target="_blank">{{
+                    getUserNameFromCache(item.steamId, item.name) }}</a></td>
+                <td>~{{ unitsToMeters(item.distance) }}m ({{ item.distance }}u)</td>
+              </tr>
+            </ng-container>
+            <ng-template #loading>
+              <tr>
+                <td colspan="3" class="text-center">Loading...</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
