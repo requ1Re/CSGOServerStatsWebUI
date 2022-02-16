@@ -31,6 +31,10 @@ export class ServerDisplayComponent implements OnInit {
   }
 
   getServerImage(server: ServerAPI.GameServer): string {
-    return GamemodeUtil.getGamemodeImagePath(server.gamemode);
+    if(server.queryInfo.map.workshop){
+      return server.queryInfo.map.preview!;
+    }else{
+      return 'assets/img/maps/preview/' + server.queryInfo.map.name + '.jpg';
+    }
   }
 }

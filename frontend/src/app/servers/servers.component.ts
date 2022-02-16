@@ -12,12 +12,17 @@ import { LoadingService } from '../shared/services/loading.service';
 export class ServersComponent extends BaseComponent implements OnInit {
 
   servers: ServerAPI.GameServer[] = [];
+  loading: boolean = false;
 
   constructor(private api: APIService, private loadingService: LoadingService) {
     super();
   }
 
   ngOnInit(): void {
+    this.register(
+      this.loadingService.loading.subscribe((l) => this.loading = l)
+    );
+
     this.loadingService.showLoading();
     this.register(
       this.api.getServers().subscribe((servers) => {

@@ -1,14 +1,15 @@
-<div class="gameserver bg-gray-800 rounded shadow-lg flex flex-col justify-center items-center space-y-2"
-    [style.backgroundImage]="'url(\'' + getServerImage(server) + '\')'">
+<div class="gameserver rounded shadow-lg flex flex-col justify-center items-center" [style.backgroundImage]="'url(\'' + getServerImage(server) + '\')'">
+  <div class="flex flex-col justify-center items-center bg-gray-800 min-w-fit rounded p-2 opacity-90 h-1/2 w-1/2">
     <p class="server-name">{{ server.name }}</p>
-    <p>{{ server.ip }}</p>
     <p class="text-lg">{{ server.queryInfo.players }}/{{ server.queryInfo.maxPlayers }}</p>
-    <div class="flex flex-row justify-center space-x-5">
-        <a href="javascript:void()" (click)="copyToClipboard(server.ip)" class="action-icon" title="Copy IP to clipboard">
-            <fa-icon [icon]="faCopy"></fa-icon>
-        </a>
-        <a [href]="'steam://connect/' + server.ip | safeUrl" class="action-icon" title="Connect to server">
-            <fa-icon [icon]="faPlayCircle"></fa-icon>
-        </a>
+    <p>{{ server.queryInfo.map.name }}</p>
+    <div class="flex flex-row justify-center space-x-5 mt-5">
+      <a href="javascript:void()" (click)="copyToClipboard(server.ip)" class="action-icon" title="Copy IP to clipboard">
+        <fa-icon [icon]="faCopy"></fa-icon>
+      </a>
+      <a [href]="'steam://connect/' + server.ip | safeUrl" class="action-icon" title="Connect to server">
+        <fa-icon [icon]="faPlayCircle"></fa-icon>
+      </a>
     </div>
+  </div>
 </div>
