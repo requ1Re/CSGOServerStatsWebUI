@@ -24,6 +24,7 @@ $router->group(['prefix' => 'v1'], function () use ($router) {
     $router->get('users/{steam_ids}', ['uses' => 'NameController@requestNames']);
 
     $router->group(['prefix' => 'server'], function () use ($router) {
+        $router->get('/', ['uses' => 'ServersController@showServers']);
         $router->group(['prefix' => 'surf'], function () use ($router) {
             $router->get('leaderboard', ['uses' => 'StatsController@showSurf']);
             $router->get('leaderboard/map/{map_name}', ['uses' => 'StatsController@showSurfMap']);
