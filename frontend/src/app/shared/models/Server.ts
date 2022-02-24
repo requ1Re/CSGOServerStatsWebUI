@@ -8,7 +8,8 @@ export namespace ServerAPI {
     name: string;
     ip: string;
     gamemode: Gamemode;
-    queryInfo: QueryInfo;
+    queryInfo?: QueryInfo;
+    status: Status;
   }
 
   export interface QueryInfo {
@@ -22,5 +23,10 @@ export namespace ServerAPI {
     name: string;
     workshop: boolean;
     preview?: string;
+  }
+
+  export enum Status {
+    ONLINE = "ONLINE",
+    OFFLINE = "OFFLINE"
   }
 }

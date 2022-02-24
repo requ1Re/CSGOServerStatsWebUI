@@ -1,9 +1,9 @@
-<div class="gameserver rounded shadow-lg flex flex-col justify-center items-center" [style.backgroundImage]="'url(\'' + getServerImage(server) + '\')'">
-  <div class="flex flex-col justify-center items-center bg-gray-800 min-w-fit rounded p-2 opacity-90 h-1/2 w-1/2">
+<div class="gameserver rounded shadow-lg flex flex-col justify-center items-center" [style.backgroundImage]="getBackgroundImage(server)">
+  <div class="flex flex-col justify-center items-center bg-gray-800 min-w-fit min-h-fit rounded p-5 opacity-90">
     <p class="server-name">{{ server.name }}</p>
-    <p class="text-lg">{{ server.queryInfo.players }}/{{ server.queryInfo.maxPlayers }}</p>
-    <p>{{ server.queryInfo.map.name }}</p>
-    <div class="flex flex-row justify-center space-x-5 mt-5">
+    <p class="text-lg mt-3" *ngIf="server.queryInfo">{{ server.queryInfo.players }}/{{ server.queryInfo.maxPlayers }}</p>
+    <p *ngIf="server.queryInfo">{{ server.queryInfo.map.name }}</p>
+    <div class="flex flex-row justify-center space-x-5 mt-3" *ngIf="isOnline(server); else offline">
       <a href="javascript:void()" (click)="copyToClipboard(server.ip)" class="action-icon" title="Copy IP to clipboard">
         <fa-icon [icon]="faCopy"></fa-icon>
       </a>
@@ -11,5 +11,11 @@
         <fa-icon [icon]="faPlayCircle"></fa-icon>
       </a>
     </div>
+    <ng-template #offline>
+      <div class="text-xl text-red-600">
+        <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+        Offline
+      </div>
+    </ng-template>
   </div>
 </div>

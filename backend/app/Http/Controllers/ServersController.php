@@ -14,39 +14,45 @@ class ServersController extends Controller
 
         foreach($obj as $key => $server){
             $ip = explode(':', $server->ip);
-            $query = new \xPaw\SourceQuery\SourceQuery();
-            $query->Connect($ip[0], $ip[1]);
 
-            $info = $query->GetInfo();
+            try {
+                $query = new \xPaw\SourceQuery\SourceQuery();
+                $query->Connect($ip[0], $ip[1]);
 
-            $queryObj = new \StdClass();
-            $queryObj->hostname = $info['HostName'];
+                $info = $query->GetInfo();
 
-            $mapObj = new \StdClass();
-            if(str_starts_with($info['Map'], "workshop")){
-                $mapObj->name = explode('/', $info['Map'])[2];
-                $mapObj->workshop = true;
+                $queryObj = new \StdClass();
+                $queryObj->hostname = $info['HostName'];
 
-                $steamResponse = Http::asForm()->post('https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/', [
-                    'itemcount' => 1,
-                    'publishedfileids[0]' => explode('/', $info['Map'])[1],
-                ]);
+                $mapObj = new \StdClass();
+                if(str_starts_with($info['Map'], "workshop")){
+                    $mapObj->name = explode('/', $info['Map'])[2];
+                    $mapObj->workshop = true;
 
-                if($steamResponse->successful()){
-                    $mapObj->preview = $steamResponse->object()->response->publishedfiledetails[0]->preview_url;
+                    $steamResponse = Http::asForm()->post('https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/', [
+                        'itemcount' => 1,
+                        'publishedfileids[0]' => explode('/', $info['Map'])[1],
+                    ]);
+
+                    if($steamResponse->successful()){
+                        $mapObj->preview = $steamResponse->object()->response->publishedfiledetails[0]->preview_url;
+                    }
+                }else{
+                    $mapObj->name = $info['Map'];
+                    $mapObj->workshop = false;
                 }
-            }else{
-                $mapObj->name = $info['Map'];
-                $mapObj->workshop = false;
+
+
+
+                $queryObj->map = $mapObj;
+                $queryObj->players = $info['Players'];
+                $queryObj->maxPlayers = $info['MaxPlayers'];
+
+                $obj[$key]->queryInfo = $queryObj;
+                $obj[$key]->status = "ONLINE";
+            }catch(\Exception $ex){
+                $obj[$key]->status = "OFFLINE";
             }
-
-
-
-            $queryObj->map = $mapObj;
-            $queryObj->players = $info['Players'];
-            $queryObj->maxPlayers = $info['MaxPlayers'];
-
-            $obj[$key]->queryInfo = $queryObj;
         }
 
         $wrapper = new Wrapper();
