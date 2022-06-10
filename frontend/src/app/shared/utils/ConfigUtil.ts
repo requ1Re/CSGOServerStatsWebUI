@@ -19,21 +19,6 @@ export class ConfigUtil {
     ],
     FOOTER_ITEMS: [
       {
-        name: "1337Frankfurt.de",
-        url: ["https://1337frankfurt.de"],
-        external: true,
-      },
-      {
-        name: "Imprint",
-        url: ["https://1337frankfurt.de/impressum/"],
-        external: true,
-      },
-      {
-        name: "Bans",
-        url: ["https://bans.require.lol"],
-        external: true
-      },
-      {
         name: "Licenses",
         url: ["/info/license"],
         external: false

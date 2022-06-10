@@ -10,7 +10,7 @@ import { LoadingService } from './shared/services/loading.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent extends BaseComponent implements OnInit {
-  title = '1337Frankfurt CS:GO Servers';
+  title = '[serverName] CS:GO Servers';
 
   errors: AppError[] = [];
   showLoading = true;
